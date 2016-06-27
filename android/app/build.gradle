@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.mysoft.h5debug"
-        minSdkVersion 15
-        targetSdkVersion 23
+        minSdkVersion 14
+        targetSdkVersion 14
         versionCode 1
         versionName "1.0"
     }
