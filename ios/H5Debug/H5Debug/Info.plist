@@ -21,13 +21,13 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.mysoft.H5Debug</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.mysoft.H5Debug</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>H5Debug</string>
+				<string>h5debug.69b52e5001736ac7</string>
 			</array>
 		</dict>
 	</array>
