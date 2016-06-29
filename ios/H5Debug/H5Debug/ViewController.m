@@ -66,7 +66,12 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSString *str = [_webView_h5 stringByEvaluatingJavaScriptFromString:@"alert(\"test\")"];
+    [self excuteJS:@"alert(\"test\")"];
+}
+
+- (void)excuteJS:(NSString *)js
+{
+    NSString *str = [_webView_h5 stringByEvaluatingJavaScriptFromString:js];
     
     NSLog(@"%@", str);
 }
@@ -88,6 +93,8 @@
                 NSLog(@"收到的文字是 txt -- %@",txt);
                 
                 _lblMsg.text = txt;
+                
+                [self excuteJS:txt];
             }
                 
                 break;

@@ -70,6 +70,28 @@
     
     NSLog(@"%@", str_url);
     
+    NSArray *arr_question = [str_url componentsSeparatedByString:@"?"];
+    
+    if (arr_question.count >= 2) {
+        
+        NSString *str_param = [arr_question objectAtIndex:1];
+        
+        NSArray *arr_param = [str_param componentsSeparatedByString:@"&"];
+        
+        for (NSString *param in arr_param) {
+            
+            NSArray *arr_value = [param componentsSeparatedByString:@"="];
+            
+            if (arr_value.count == 2) {
+                
+                NSString *key = [arr_value objectAtIndex:0];
+                NSString *value = [arr_value objectAtIndex:1];
+                
+                NSLog(@"key = %@ value = %@", key, value);
+            }
+        }
+    }
+    
     return YES;
 }
 
