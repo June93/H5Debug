@@ -28,6 +28,8 @@
 		C33F5E881D23673600E7F4AC /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E871D23673600E7F4AC /* libstdc++.6.0.9.tbd */; };
 		C33F5E8A1D23674100E7F4AC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E891D23674100E7F4AC /* libsqlite3.tbd */; };
 		C33F5E911D23ADBB00E7F4AC /* WebConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F5E901D23ADBB00E7F4AC /* WebConsole.m */; };
+		C36810B91D23D4B300D2CD0F /* PGToast.m in Sources */ = {isa = PBXBuildFile; fileRef = C36810B81D23D4B300D2CD0F /* PGToast.m */; };
+		C36810BC1D23D51C00D2CD0F /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = C36810BB1D23D51C00D2CD0F /* NSString+URLEncoding.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +97,10 @@
 		C33F5E891D23674100E7F4AC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		C33F5E8F1D23ADBB00E7F4AC /* WebConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsole.h; sourceTree = "<group>"; };
 		C33F5E901D23ADBB00E7F4AC /* WebConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebConsole.m; sourceTree = "<group>"; };
+		C36810B71D23D4B300D2CD0F /* PGToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGToast.h; sourceTree = "<group>"; };
+		C36810B81D23D4B300D2CD0F /* PGToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGToast.m; sourceTree = "<group>"; };
+		C36810BA1D23D51C00D2CD0F /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		C36810BB1D23D51C00D2CD0F /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +164,10 @@
 				C33F5E901D23ADBB00E7F4AC /* WebConsole.m */,
 				C33F5D961D22729600E7F4AC /* ViewController.h */,
 				C33F5D971D22729600E7F4AC /* ViewController.m */,
+				C36810B71D23D4B300D2CD0F /* PGToast.h */,
+				C36810B81D23D4B300D2CD0F /* PGToast.m */,
+				C36810BA1D23D51C00D2CD0F /* NSString+URLEncoding.h */,
+				C36810BB1D23D51C00D2CD0F /* NSString+URLEncoding.m */,
 				C33F5D991D22729600E7F4AC /* Main.storyboard */,
 				C33F5D9C1D22729600E7F4AC /* Assets.xcassets */,
 				C33F5D9E1D22729600E7F4AC /* LaunchScreen.storyboard */,
@@ -319,7 +329,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C36810BC1D23D51C00D2CD0F /* NSString+URLEncoding.m in Sources */,
 				C33F5E911D23ADBB00E7F4AC /* WebConsole.m in Sources */,
+				C36810B91D23D4B300D2CD0F /* PGToast.m in Sources */,
 				C33F5D981D22729600E7F4AC /* ViewController.m in Sources */,
 				C33F5D951D22729600E7F4AC /* AppDelegate.m in Sources */,
 				C33F5D921D22729600E7F4AC /* main.m in Sources */,
