@@ -49,9 +49,16 @@ function writeLog(message){
   }
 }
 
+function add(a,b){
+  var sum=a-b;
+  writeLog(a+'+'+b+'='+sum);
+  return sum;
+}
+
 </script>
-<p>开发调试页面</p>
+<p>开发调试界面</p>
 <button onclick="writeLog('hello')">写日志</button><br />
+<button onclick="add(1,1)">1+1=?</button><br />
 </body>
 
 </html>
