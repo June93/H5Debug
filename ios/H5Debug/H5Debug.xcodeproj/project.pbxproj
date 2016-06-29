@@ -27,6 +27,7 @@
 		C33F5E861D23672F00E7F4AC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E851D23672F00E7F4AC /* libc++.tbd */; };
 		C33F5E881D23673600E7F4AC /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E871D23673600E7F4AC /* libstdc++.6.0.9.tbd */; };
 		C33F5E8A1D23674100E7F4AC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E891D23674100E7F4AC /* libsqlite3.tbd */; };
+		C33F5E911D23ADBB00E7F4AC /* WebConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F5E901D23ADBB00E7F4AC /* WebConsole.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,8 @@
 		C33F5E851D23672F00E7F4AC /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		C33F5E871D23673600E7F4AC /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		C33F5E891D23674100E7F4AC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		C33F5E8F1D23ADBB00E7F4AC /* WebConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConsole.h; sourceTree = "<group>"; };
+		C33F5E901D23ADBB00E7F4AC /* WebConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebConsole.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,8 @@
 				C33F5E451D23643D00E7F4AC /* HyphenateSDK */,
 				C33F5D931D22729600E7F4AC /* AppDelegate.h */,
 				C33F5D941D22729600E7F4AC /* AppDelegate.m */,
+				C33F5E8F1D23ADBB00E7F4AC /* WebConsole.h */,
+				C33F5E901D23ADBB00E7F4AC /* WebConsole.m */,
 				C33F5D961D22729600E7F4AC /* ViewController.h */,
 				C33F5D971D22729600E7F4AC /* ViewController.m */,
 				C33F5D991D22729600E7F4AC /* Main.storyboard */,
@@ -314,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C33F5E911D23ADBB00E7F4AC /* WebConsole.m in Sources */,
 				C33F5D981D22729600E7F4AC /* ViewController.m in Sources */,
 				C33F5D951D22729600E7F4AC /* AppDelegate.m in Sources */,
 				C33F5D921D22729600E7F4AC /* main.m in Sources */,
