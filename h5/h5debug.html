@@ -108,7 +108,7 @@
 </div>
 
 <script>
-  function checkRoomId() {
+  function checkTargetUrl() {
   var url = location.search; //获取url中"?"符后的字串
    var theRequest = new Object();
    if (url.indexOf("?") != -1) {
@@ -117,10 +117,10 @@
       for(var i = 0; i < strs.length; i ++) {
          theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
          console.log('参数：'+strs[i].split("=")[0]+ '值：'+strs[i].split("=")[1]);
-         if(strs[i].split("=")[0]=='roomId'){
+         if(strs[i].split("=")[0]=='targetUrl'){
             var launchBtn=document.getElementById('launch-btn')
             var value=launchBtn.getAttribute('href');
-            value = value+'roomId='+strs[i].split("=")[1];
+            value = value+'targetUrl='+strs[i].split("=")[1];
             launchBtn.setAttribute('href',value);
             console.log(launchBtn.getAttribute('href'));
          }
@@ -133,6 +133,6 @@
 
 <div id="js-atavi-import-extension-install"></div>
 <script>
-checkRoomId();
+checkTargetUrl();
 </script
 </body></html>
