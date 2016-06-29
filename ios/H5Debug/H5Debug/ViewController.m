@@ -15,6 +15,8 @@
 
 #import "WebConsole.h"
 
+#import "PGToast.h"
+
 #define default_address @"http://10.5.103.69:8081/h5debug/phone/index.html"
 
 @interface ViewController ()<EMChatManagerDelegate, UIWebViewDelegate>
@@ -92,6 +94,9 @@
         if (!error) {
             
             NSLog(@"消息发送成功");
+            
+            PGToast *toast = [PGToast makeToast:@"消息发送成功"];
+            [toast show];
         }
         
     }];

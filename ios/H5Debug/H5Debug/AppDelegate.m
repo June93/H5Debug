@@ -35,7 +35,8 @@
         
         NSLog(@"登录成功");
         
-        [PGToast makeToast:@"连接成功"];
+        PGToast *toast = [PGToast makeToast:@"连接成功"];
+        [toast show];
         
         [[EMClient sharedClient].options setIsAutoLogin:YES];
         
