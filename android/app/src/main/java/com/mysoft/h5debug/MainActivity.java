@@ -1,5 +1,7 @@
 package com.mysoft.h5debug;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,24 +19,85 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
 import com.mysoft.util.DebugUtil;
 import com.mysoft.util.ListUtil;
+import com.mysoft.util.StringUtils;
 import com.mysoft.util.ToastUtil;
-
-import org.json.JSONException;
+import com.mysoft.util.UrlUtil;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private WebView webView;
 
     private WebSettings webSettings;
+
+    private final String H5_DEBUG_SCHEME = "h5debug.69b52e5001736ac7";
+
+    private String url = "";
+
+    private final String NORMAL_URL = "http://10.5.103.69:8081/h5debug/phone/index.html";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initWebView();
-        loadUrl("http://10.5.103.69:8081/test.html");
+        loadPage();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    private void loadPage() {
+        if (isStratFromH5Page()) {
+            //登录
+            DebugUtil.login(new DebugUtil.LoginCallBack() {
+                @Override
+                public void resultCallBack(boolean result) {
+                    if (result) {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                ToastUtil.showToastDefault(getBaseContext(), "连接成功");
+                                EMClient.getInstance().groupManager().loadAllGroups();
+                                EMClient.getInstance().chatManager().loadAllConversations();
+                            }
+                        });
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                ToastUtil.showToastDefault(getBaseContext(), "连接失败");
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            url = NORMAL_URL;
+        }
+        loadUrl(url);
+    }
+
+    private boolean isStratFromH5Page() {
+        boolean result = false;
+        Intent intent = getIntent();
+        if (intent != null) {
+            String scheme = intent.getScheme();
+            if (H5_DEBUG_SCHEME.equalsIgnoreCase(scheme)) {
+                result = true;
+                //同时解Url
+                Uri uri = intent.getData();
+                if (uri != null) {
+                    url = uri.getQueryParameter("targetUrl");
+                    url = UrlUtil.decodeUrl(url);
+                    if (StringUtils.isNull(url)) {
+                        url = NORMAL_URL;
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     private void initWebView() {
@@ -68,21 +131,13 @@ public class MainActivity extends AppCompatActivity {
 
     private WebChromeClient webChromeClient = new WebChromeClient() {
 
-        @Override
-        public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
-            ToastUtil.showToastDefault(getBaseContext(), message);
-            return true;
-        }
-
-
-        @Override
-        public boolean onJsConfirm(WebView view, String url, String message, final JsResult result) {
-            ToastUtil.showToastDefault(getBaseContext(), message);
-            return true;
+        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+            DebugUtil.sendLog(message, "web");
+            return false;
         }
 
         public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-            ToastUtil.showToastDefault(getBaseContext(), consoleMessage.message());
+            DebugUtil.sendLog(consoleMessage.message(), "web");
             return false;
         }
 
@@ -102,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
                     if (emMessageBody != null) {
                         jsStr = emMessageBody.getMessage();
                     }
-                    Log.v("MainActivity", jsStr);
                     DebugUtil.excuteJs(webView, jsStr);
                 }
             }

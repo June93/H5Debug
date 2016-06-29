@@ -55,13 +55,21 @@
         </receiver>
         //------------------------------------------------------------------------------------------------------
         <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <data android:scheme="h5debug.69b52e5001736ac7" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
 
     </application>
 
