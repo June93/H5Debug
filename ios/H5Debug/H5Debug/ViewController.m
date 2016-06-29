@@ -13,7 +13,7 @@
 #import "EMTextMessageBody.h"
 #import "EMConversation.h"
 
-@interface ViewController ()<EMChatManagerDelegate>
+@interface ViewController ()<EMChatManagerDelegate, UIWebViewDelegate>
 
 @end
 
@@ -22,6 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    NSURL *url = [[NSURL alloc]initWithString:@"http://www.baidu.com"];
+    [_webView_h5 loadRequest:[NSURLRequest requestWithURL:url]];
     
     //注册消息回调
     [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
@@ -59,6 +62,13 @@
         }
         
     }];
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSString *str = [_webView_h5 stringByEvaluatingJavaScriptFromString:@"alert(\"test\")"];
+    
+    NSLog(@"%@", str);
 }
 
 #pragma mark - EMChatManagerDelegate

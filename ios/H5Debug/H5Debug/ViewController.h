@@ -10,6 +10,8 @@
 
 @interface ViewController : UIViewController
 
+@property (nonatomic, weak) IBOutlet UIWebView *webView_h5;
+
 @property (nonatomic, weak) IBOutlet UILabel *lblMsg;
 
 @end
