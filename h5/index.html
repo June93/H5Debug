@@ -70,6 +70,14 @@
                 </span>
             </div>
             <div id="leftmiddle">
+             <ul>
+                <img src="qrcode/1.png" width="250px" height="250px"
+                    style="margin-top: 5px; margin-left: -15px" />
+            </ul>
+            <ul>
+                <img src="qrcode/2.png" width="250px" height="250px"
+                    style="margin-top: 15px; margin-left: -15px" />
+            </ul>
             </div>
             <div id="contractlist11">
                 <div class="accordion" id="accordionDiv">
@@ -106,22 +114,7 @@
                 <div class="chat02_title">
                    
 					<label id="chat02_title_t"></label>
-                    <div id="wl_faces_box" class="wl_faces_box">
-                        <div class="wl_faces_content">
-                            <div class="title">
-                                <ul>
-                                    <li class="title_name">常用表情</li>
-                                    <li class="wl_faces_close"><span
-                                        onclick='turnoffFaces_box()'>&nbsp;</span></li>
-                                </ul>
-                            </div>
-                            <div id="wl_faces_main" class="wl_faces_main">
-                                <ul id="emotionUL">
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="wlf_icon"></div>
-                    </div>
+                  
                 </div>
                 <div id="input_content" class="chat02_content">
                     <textarea id="talkInputId" style="resize: none;"></textarea>
@@ -132,21 +125,10 @@
                             onclick="sendText()" /></li>
                     </ul>
                 </div>
-
                 <div style="clear: both;"></div>
             </div>
         </div>
-        <!-- 一般消息通知 -->
-        <div id="notice-block-div" class="modal hide">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <div class="modal-body">
-                <h4>Warning!</h4>
-                <div id="notice-block-body"></div>
-            </div>
-        </div>
     </div>
-	<input type='file' id="fileInput" style='display:none;'/>
-	<div id='alert' class='em-alert' style='display:none;'><span></span><button>好的</button></div>
 	<script src="static/js/webim.js"></script>
 </body>
 </html>
