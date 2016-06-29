@@ -26,15 +26,33 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Mm-Zb-SCd">
+                                <rect key="frame" x="10" y="245" width="300" height="40"/>
+                                <color key="backgroundColor" red="0.1333333333" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Nx3-I6-151"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="发送消息"/>
+                                <connections>
+                                    <action selector="btn_sendMsg:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gD1-xz-1L9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="0Mm-Zb-SCd" secondAttribute="trailing" constant="10" id="0Ln-nC-s9c"/>
                             <constraint firstItem="S3o-3c-ZWu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5a2-kI-Gkc"/>
+                            <constraint firstItem="0Mm-Zb-SCd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="6NT-F7-urn"/>
                             <constraint firstAttribute="trailing" secondItem="S3o-3c-ZWu" secondAttribute="trailing" id="H96-qa-qnE"/>
                             <constraint firstItem="S3o-3c-ZWu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="112" id="RD8-Rz-kow"/>
+                            <constraint firstItem="0Mm-Zb-SCd" firstAttribute="top" secondItem="S3o-3c-ZWu" secondAttribute="bottom" constant="65" id="xB6-c6-bjQ"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="lblMsg" destination="S3o-3c-ZWu" id="yKr-oy-WEJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

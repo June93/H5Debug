@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "EMSDK.h"
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +19,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    EMOptions *options = [EMOptions optionsWithAppkey:@"acetrump#h5-debug"];
+    
+    [[EMClient sharedClient] initializeSDKWithOptions:options];
+    
+    EMError *error = [[EMClient sharedClient] loginWithUsername:@"iphone" password:@"123456"];
+    if (!error) {
+        
+        NSLog(@"登录成功");
+        
+        [[EMClient sharedClient].options setIsAutoLogin:YES];
+        
+    } else {
+        
+        NSLog(@"%@", error.errorDescription);
+    }
+    
     return YES;
 }
 
@@ -26,12 +45,15 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    // APP进入后台
+    [[EMClient sharedClient] applicationDidEnterBackground:application];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    // APP进入前台
+    [[EMClient sharedClient] applicationWillEnterForeground:application];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

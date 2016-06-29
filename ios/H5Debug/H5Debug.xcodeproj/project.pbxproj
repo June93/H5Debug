@@ -17,6 +17,16 @@
 		C33F5E741D23643D00E7F4AC /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E701D23643D00E7F4AC /* libcurl.a */; };
 		C33F5E751D23643D00E7F4AC /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E711D23643D00E7F4AC /* libssl.a */; };
 		C33F5E761D23643D00E7F4AC /* libHyphenateSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E721D23643D00E7F4AC /* libHyphenateSDK.a */; };
+		C33F5E781D2366E400E7F4AC /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E771D2366E400E7F4AC /* CoreMedia.framework */; };
+		C33F5E7A1D2366EA00E7F4AC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E791D2366EA00E7F4AC /* AudioToolbox.framework */; };
+		C33F5E7C1D2366F700E7F4AC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E7B1D2366F700E7F4AC /* AVFoundation.framework */; };
+		C33F5E7E1D23670000E7F4AC /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E7D1D23670000E7F4AC /* libiconv.tbd */; };
+		C33F5E801D23670C00E7F4AC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E7F1D23670C00E7F4AC /* MobileCoreServices.framework */; };
+		C33F5E821D23671800E7F4AC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E811D23671800E7F4AC /* ImageIO.framework */; };
+		C33F5E841D23672600E7F4AC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E831D23672600E7F4AC /* libz.tbd */; };
+		C33F5E861D23672F00E7F4AC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E851D23672F00E7F4AC /* libc++.tbd */; };
+		C33F5E881D23673600E7F4AC /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E871D23673600E7F4AC /* libstdc++.6.0.9.tbd */; };
+		C33F5E8A1D23674100E7F4AC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C33F5E891D23674100E7F4AC /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +82,16 @@
 		C33F5E701D23643D00E7F4AC /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcurl.a; sourceTree = "<group>"; };
 		C33F5E711D23643D00E7F4AC /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		C33F5E721D23643D00E7F4AC /* libHyphenateSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libHyphenateSDK.a; sourceTree = "<group>"; };
+		C33F5E771D2366E400E7F4AC /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		C33F5E791D2366EA00E7F4AC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		C33F5E7B1D2366F700E7F4AC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C33F5E7D1D23670000E7F4AC /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		C33F5E7F1D23670C00E7F4AC /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		C33F5E811D23671800E7F4AC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		C33F5E831D23672600E7F4AC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		C33F5E851D23672F00E7F4AC /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		C33F5E871D23673600E7F4AC /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		C33F5E891D23674100E7F4AC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +99,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C33F5E8A1D23674100E7F4AC /* libsqlite3.tbd in Frameworks */,
+				C33F5E881D23673600E7F4AC /* libstdc++.6.0.9.tbd in Frameworks */,
+				C33F5E861D23672F00E7F4AC /* libc++.tbd in Frameworks */,
+				C33F5E841D23672600E7F4AC /* libz.tbd in Frameworks */,
+				C33F5E821D23671800E7F4AC /* ImageIO.framework in Frameworks */,
+				C33F5E801D23670C00E7F4AC /* MobileCoreServices.framework in Frameworks */,
+				C33F5E7E1D23670000E7F4AC /* libiconv.tbd in Frameworks */,
+				C33F5E7C1D2366F700E7F4AC /* AVFoundation.framework in Frameworks */,
+				C33F5E7A1D2366EA00E7F4AC /* AudioToolbox.framework in Frameworks */,
+				C33F5E781D2366E400E7F4AC /* CoreMedia.framework in Frameworks */,
 				C33F5E731D23643D00E7F4AC /* libcrypto.a in Frameworks */,
 				C33F5E741D23643D00E7F4AC /* libcurl.a in Frameworks */,
 				C33F5E751D23643D00E7F4AC /* libssl.a in Frameworks */,
@@ -92,6 +122,16 @@
 		C33F5D841D22729600E7F4AC = {
 			isa = PBXGroup;
 			children = (
+				C33F5E891D23674100E7F4AC /* libsqlite3.tbd */,
+				C33F5E871D23673600E7F4AC /* libstdc++.6.0.9.tbd */,
+				C33F5E851D23672F00E7F4AC /* libc++.tbd */,
+				C33F5E831D23672600E7F4AC /* libz.tbd */,
+				C33F5E811D23671800E7F4AC /* ImageIO.framework */,
+				C33F5E7F1D23670C00E7F4AC /* MobileCoreServices.framework */,
+				C33F5E7D1D23670000E7F4AC /* libiconv.tbd */,
+				C33F5E7B1D2366F700E7F4AC /* AVFoundation.framework */,
+				C33F5E791D2366EA00E7F4AC /* AudioToolbox.framework */,
+				C33F5E771D2366E400E7F4AC /* CoreMedia.framework */,
 				C33F5D8F1D22729600E7F4AC /* H5Debug */,
 				C33F5D8E1D22729600E7F4AC /* Products */,
 			);
@@ -390,6 +430,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Haibin Chen (8W822X45X6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Haibin Chen (8W822X45X6)";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = H5Debug/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -409,6 +450,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Haibin Chen (8W822X45X6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Haibin Chen (8W822X45X6)";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = H5Debug/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
