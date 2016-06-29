@@ -17,9 +17,9 @@
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request
 {
-    //http://debugger/console-log
+    //http://h5debug/console-log
     
-    if ([[[request URL] host] isEqualToString:@"debugger"]) {
+    if ([[[request URL] host] isEqualToString:@"h5debug"]) {
         
         NSString *webview_log = [[[request URL] path] substringFromIndex:1];
         

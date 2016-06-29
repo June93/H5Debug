@@ -15,7 +15,7 @@
 
 #import "WebConsole.h"
 
-#define default_address @"http://www.baidu.com"
+#define default_address @"http://10.5.103.69:8081/h5debug/phone/index.html"
 
 @interface ViewController ()<EMChatManagerDelegate, UIWebViewDelegate>
 
@@ -34,8 +34,7 @@
     
     [WebConsole enable];
     
-    NSURL *url = [[NSURL alloc]initWithString:default_address];
-    [_webView_h5 loadRequest:[NSURLRequest requestWithURL:url]];
+    [self loadH5:default_address];
     
     //监听日志输出
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(send_console_log:) name:@"console_log" object:nil];
@@ -55,6 +54,13 @@
 }
 
 #pragma mark - Selector
+//加载指定页面
+- (void)loadH5:(NSString *)address
+{
+    NSURL *url = [[NSURL alloc]initWithString:address];
+    [_webView_h5 loadRequest:[NSURLRequest requestWithURL:url]];
+}
+
 - (void)send_console_log:(NSNotification *)notify
 {
     NSString *log = (NSString *)[notify object];
