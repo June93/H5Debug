@@ -10,6 +10,12 @@
 
 #import "EMSDK.h"
 
+#import "ViewController.h"
+
+#import "PGToast.h"
+
+#import "NSString+URLEncoding.h"
+
 @interface AppDelegate ()
 
 @end
@@ -28,6 +34,9 @@
     if (!error) {
         
         NSLog(@"登录成功");
+        
+        PGToast *toast = [PGToast makeToast:@"连接成功"];
+        [toast show];
         
         [[EMClient sharedClient].options setIsAutoLogin:YES];
         
@@ -66,6 +75,10 @@
 
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
 {
+    BOOL isExistTargetUrl = NO;
+    
+    NSString *targetUrl = @"";
+    
     NSString *str_url = [url absoluteString];
     
     NSLog(@"%@", str_url);
@@ -88,8 +101,31 @@
                 NSString *value = [arr_value objectAtIndex:1];
                 
                 NSLog(@"key = %@ value = %@", key, value);
+                
+                if ([key isEqualToString:@"targetUrl"]) {
+                    
+                    isExistTargetUrl = YES;
+                    
+                    targetUrl = value;
+                    
+                    break;
+                }
             }
         }
+    }
+    
+    //刷新 
+    ViewController *vc = (ViewController *)self.window.rootViewController;
+    
+    if (isExistTargetUrl) {
+        
+        targetUrl = [targetUrl URLDecodedString];
+        
+        [vc loadH5:targetUrl];
+        
+    } else {
+        
+        [vc.webView_h5 reload];
     }
     
     return YES;

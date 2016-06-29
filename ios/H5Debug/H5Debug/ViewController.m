@@ -13,18 +13,33 @@
 #import "EMTextMessageBody.h"
 #import "EMConversation.h"
 
+#import "WebConsole.h"
+
+#import "PGToast.h"
+
+#define default_address @"http://10.5.103.69:8081/h5debug/phone/index.html"
+
 @interface ViewController ()<EMChatManagerDelegate, UIWebViewDelegate>
 
 @end
 
 @implementation ViewController
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    NSURL *url = [[NSURL alloc]initWithString:@"http://www.baidu.com"];
-    [_webView_h5 loadRequest:[NSURLRequest requestWithURL:url]];
+    [WebConsole enable];
+    
+    [self loadH5:default_address];
+    
+    //监听日志输出
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(send_console_log:) name:@"console_log" object:nil];
     
     //注册消息回调
     [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
@@ -37,6 +52,26 @@
 
 - (IBAction)btn_sendMsg:(id)sender
 {
+    [self sendMessage:@"from iphone message"];
+}
+
+#pragma mark - Selector
+//加载指定页面
+- (void)loadH5:(NSString *)address
+{
+    NSURL *url = [[NSURL alloc]initWithString:address];
+    [_webView_h5 loadRequest:[NSURLRequest requestWithURL:url]];
+}
+
+- (void)send_console_log:(NSNotification *)notify
+{
+    NSString *log = (NSString *)[notify object];
+    
+    [self sendMessage:log];
+}
+
+- (void)sendMessage:(NSString *)content
+{
     NSArray *arr_ems = [[EMClient sharedClient].chatManager getAllConversations];
     if (arr_ems.count == 0) {
         return;
@@ -44,7 +79,7 @@
     
     EMConversation *ems = [arr_ems objectAtIndex:0];
     
-    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"from iphone message"];
+    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:content];
     NSString *from = [[EMClient sharedClient] currentUsername];
     
     EMMessage *message = [[EMMessage alloc] initWithConversationID:ems.conversationId from:from to:ems.conversationId body:body ext:nil];
@@ -59,21 +94,27 @@
         if (!error) {
             
             NSLog(@"消息发送成功");
+            
+            PGToast *toast = [PGToast makeToast:@"消息发送成功"];
+            [toast show];
         }
         
     }];
 }
 
--(void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self excuteJS:@"alert(\"test\")"];
-}
-
 - (void)excuteJS:(NSString *)js
 {
-    NSString *str = [_webView_h5 stringByEvaluatingJavaScriptFromString:js];
+    NSString *js_handle = [NSString stringWithFormat:@"setTimeout(function(){%@;}, 1);", js];
+    
+    NSString *str = [_webView_h5 stringByEvaluatingJavaScriptFromString:js_handle];
     
     NSLog(@"%@", str);
+}
+
+#pragma mark - UIWebViewDelegate
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    //
 }
 
 #pragma mark - EMChatManagerDelegate
@@ -90,7 +131,7 @@
                 //收到的文字消息
                 EMTextMessageBody *textBody = (EMTextMessageBody *)msgBody;
                 NSString *txt = textBody.text;
-                NSLog(@"收到的文字是 txt -- %@",txt);
+                NSLog(@"收到的文字是 -- %@",txt);
                 
                 _lblMsg.text = txt;
                 

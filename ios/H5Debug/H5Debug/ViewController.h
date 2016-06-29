@@ -14,5 +14,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *lblMsg;
 
+- (void)loadH5:(NSString *)address;
+
 @end
 
