@@ -8,6 +8,14 @@
 
 #import "AppDelegate.h"
 
+#import "EMSDK.h"
+
+#import "ViewController.h"
+
+#import "PGToast.h"
+
+#import "NSString+URLEncoding.h"
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +25,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    EMOptions *options = [EMOptions optionsWithAppkey:@"acetrump#h5-debug"];
+    
+    [[EMClient sharedClient] initializeSDKWithOptions:options];
+    
+    EMError *error = [[EMClient sharedClient] loginWithUsername:@"iphone" password:@"123456"];
+    if (!error) {
+        
+        NSLog(@"登录成功");
+        
+        PGToast *toast = [PGToast makeToast:@"连接成功"];
+        [toast show];
+        
+        [[EMClient sharedClient].options setIsAutoLogin:YES];
+        
+    } else {
+        
+        NSLog(@"%@", error.errorDescription);
+    }
+    
     return YES;
 }
 
@@ -26,12 +54,15 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    // APP进入后台
+    [[EMClient sharedClient] applicationDidEnterBackground:application];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+    // APP进入前台
+    [[EMClient sharedClient] applicationWillEnterForeground:application];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -44,9 +75,58 @@
 
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
 {
+    BOOL isExistTargetUrl = NO;
+    
+    NSString *targetUrl = @"";
+    
     NSString *str_url = [url absoluteString];
     
     NSLog(@"%@", str_url);
+    
+    NSArray *arr_question = [str_url componentsSeparatedByString:@"?"];
+    
+    if (arr_question.count >= 2) {
+        
+        NSString *str_param = [arr_question objectAtIndex:1];
+        
+        NSArray *arr_param = [str_param componentsSeparatedByString:@"&"];
+        
+        for (NSString *param in arr_param) {
+            
+            NSArray *arr_value = [param componentsSeparatedByString:@"="];
+            
+            if (arr_value.count == 2) {
+                
+                NSString *key = [arr_value objectAtIndex:0];
+                NSString *value = [arr_value objectAtIndex:1];
+                
+                NSLog(@"key = %@ value = %@", key, value);
+                
+                if ([key isEqualToString:@"targetUrl"]) {
+                    
+                    isExistTargetUrl = YES;
+                    
+                    targetUrl = value;
+                    
+                    break;
+                }
+            }
+        }
+    }
+    
+    //刷新 
+    ViewController *vc = (ViewController *)self.window.rootViewController;
+    
+    if (isExistTargetUrl) {
+        
+        targetUrl = [targetUrl URLDecodedString];
+        
+        [vc loadH5:targetUrl];
+        
+    } else {
+        
+        [vc.webView_h5 reload];
+    }
     
     return YES;
 }
