@@ -17,24 +17,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hello world" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3o-3c-ZWu">
-                                <rect key="frame" x="0.0" y="132" width="320" height="48"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUv-IZ-bTW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="5lr-md-Lyy"/>
+                                </connections>
+                            </webView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="接收消息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3o-3c-ZWu">
+                                <rect key="frame" x="10" y="445" width="300" height="50"/>
+                                <color key="backgroundColor" red="0.99607843139999996" green="0.58039215690000001" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="Aby-UQ-cpU"/>
+                                    <constraint firstAttribute="height" constant="50" id="dEa-TB-fuj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Mm-Zb-SCd">
+                                <rect key="frame" x="10" y="510" width="300" height="40"/>
+                                <color key="backgroundColor" red="0.1333333333" green="0.60392156860000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="vw9-cK-npM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="发送消息"/>
+                                <connections>
+                                    <action selector="btn_sendMsg:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gD1-xz-1L9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="S3o-3c-ZWu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5a2-kI-Gkc"/>
-                            <constraint firstAttribute="trailing" secondItem="S3o-3c-ZWu" secondAttribute="trailing" id="H96-qa-qnE"/>
-                            <constraint firstItem="S3o-3c-ZWu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="112" id="RD8-Rz-kow"/>
+                            <constraint firstItem="0Mm-Zb-SCd" firstAttribute="top" secondItem="S3o-3c-ZWu" secondAttribute="bottom" constant="15" id="8qc-V3-P0M"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0Mm-Zb-SCd" secondAttribute="bottom" constant="18" id="aCS-P3-99q"/>
+                            <constraint firstAttribute="trailing" secondItem="0Mm-Zb-SCd" secondAttribute="trailing" constant="10" id="bIr-rR-h2u"/>
+                            <constraint firstItem="S3o-3c-ZWu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="f4u-vj-rcS"/>
+                            <constraint firstAttribute="trailing" secondItem="FUv-IZ-bTW" secondAttribute="trailing" id="fYL-Ir-kk8"/>
+                            <constraint firstAttribute="trailing" secondItem="S3o-3c-ZWu" secondAttribute="trailing" constant="10" id="pYh-CO-M3M"/>
+                            <constraint firstItem="0Mm-Zb-SCd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="q7c-sd-I6k"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FUv-IZ-bTW" secondAttribute="bottom" id="tFi-lx-Lpn"/>
+                            <constraint firstItem="FUv-IZ-bTW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="y1I-vl-Ibb"/>
+                            <constraint firstItem="FUv-IZ-bTW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="yTi-Bw-mrK"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="lblMsg" destination="S3o-3c-ZWu" id="yKr-oy-WEJ"/>
+                        <outlet property="webView_h5" destination="FUv-IZ-bTW" id="Na1-mK-KaM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
