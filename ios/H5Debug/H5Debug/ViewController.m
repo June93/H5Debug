@@ -72,12 +72,13 @@
 
 - (void)sendMessage:(NSString *)content
 {
-    NSArray *arr_ems = [[EMClient sharedClient].chatManager getAllConversations];
-    if (arr_ems.count == 0) {
-        return;
+    EMError *error = nil;
+    NSArray *userlist = [[EMClient sharedClient].contactManager getContactsFromServerWithError:&error];
+    if (!error) {
+        NSLog(@"获取成功 -- %@",userlist);
     }
     
-    EMConversation *ems = [arr_ems objectAtIndex:0];
+    EMConversation *ems = [[EMClient sharedClient].chatManager getConversation:@"web" type:EMConversationTypeChat createIfNotExist:YES];
     
     EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:content];
     NSString *from = [[EMClient sharedClient] currentUsername];
