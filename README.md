@@ -1,3 +1,4 @@
+```js
 相关网页地址：
 1、WebIM地址 http://10.5.103.69:8081/h5debug/index.html
 2、启动APP二维码地址：
@@ -21,3 +22,4 @@ function writeLog(message){
      console.log(message);
   }
 }
+```
