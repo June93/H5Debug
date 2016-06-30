@@ -35,6 +35,30 @@ public class DebugUtil {
 
     }
 
+    private static void logout(final LoginCallBack callBack) {
+        EMClient.getInstance().logout(true, new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+                if (callBack != null) {
+                    callBack.resultCallBack(true);
+                }
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                if (callBack != null) {
+                    callBack.resultCallBack(false);
+                }
+            }
+        });
+    }
+
     public interface LoginCallBack {
         void resultCallBack(boolean result);
     }
