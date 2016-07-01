@@ -169,6 +169,10 @@
 {
     EMError *error = [[EMClient sharedClient] logout:YES];
     if (!error) {
+        
+        PGToast *toast = [PGToast makeToast:@"断开调试模式"];
+        [toast show];
+        
         NSLog(@"退出成功");
     }
 }

@@ -88,12 +88,13 @@
     _view_debug.hidden = YES;
     _lbl_debug.hidden = YES;
     
-    //退出环信
     AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appd logoutEM];
     
-    PGToast *toast = [PGToast makeToast:@"断开调试模式"];
-    [toast show];
+    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"退出调试模式"];
+    [appd sendMessage:body];
+    
+    //退出环信
+    [appd logoutEM];
 }
 
 - (void)send_console_log:(NSNotification *)notify
