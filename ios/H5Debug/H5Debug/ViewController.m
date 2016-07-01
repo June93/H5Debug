@@ -40,6 +40,8 @@
     
     _btn_reload.layer.cornerRadius = _btn_reload.frame.size.width/2.0;
     _btn_reload.layer.masksToBounds = YES;
+    [_btn_reload setBackgroundImage:[Utility imageWithColor:[Utility colorFromHexRGB:@"66cc00"]] forState:UIControlStateNormal];
+    [_btn_reload setBackgroundImage:[Utility imageWithColor:[Utility colorFromHexRGB:@"4caf50"]] forState:UIControlStateHighlighted];
     
     [_lbl_debug.layer addAnimation:[self opacityForever_Animation:1] forKey:nil];
     

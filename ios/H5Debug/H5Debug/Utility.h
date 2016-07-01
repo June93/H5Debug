@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#import <UIKit/UIKit.h>
+
 @interface Utility : NSObject
 
 + (NSString *)makeUrl:(NSString *)openUrl;
+
++ (UIImage *)imageWithColor:(UIColor *)color;
+
++ (UIColor *)colorFromHexRGB:(NSString *)inColorString;
 
 @end
