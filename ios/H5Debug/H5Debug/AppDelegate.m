@@ -18,6 +18,8 @@
 #import "GBDeviceInfo.h"
 #import "OpenUDID.h"
 
+#import "constant.h"
+
 @interface AppDelegate ()
 
 @end
@@ -129,7 +131,7 @@
         
     } else {
         
-        [vc.webView_h5 reload];
+        [vc loadH5:default_address];
     }
     
     [self loginEM];

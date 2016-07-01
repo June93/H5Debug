@@ -14,10 +14,7 @@
 #import "WebConsole.h"
 #import "PGToast.h"
 
-#define kScreenWidth  [[UIScreen mainScreen] bounds].size.width
-#define kScreenHeight [[UIScreen mainScreen] bounds].size.height
-
-#define default_address @"http://10.5.103.69:8081/h5debug/phone/index.html"
+#import "constant.h"
 
 @interface ViewController ()<EMChatManagerDelegate, UIWebViewDelegate>
 
@@ -36,6 +33,9 @@
     
     _lblMsg.hidden = YES;
     _btnSend.hidden = YES;
+    _lbl_debug.hidden = YES;
+    
+    [_lbl_debug.layer addAnimation:[self opacityForever_Animation:1] forKey:nil];
     
     [WebConsole enable];
     
@@ -138,6 +138,21 @@
             
         }
     }
+}
+
+-(CABasicAnimation *)opacityForever_Animation:(float)time
+{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    animation.fromValue = [NSNumber numberWithFloat:1.0f];
+    animation.toValue = [NSNumber numberWithFloat:0.0f];//这是透明度。
+    animation.autoreverses = YES;
+    animation.duration = time;
+    animation.repeatCount = MAXFLOAT;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    
+    return animation;
 }
 
 #pragma mark - UIWebViewDelegate

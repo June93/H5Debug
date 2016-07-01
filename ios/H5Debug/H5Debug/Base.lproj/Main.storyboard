@@ -46,6 +46,13 @@
                                     <action selector="btn_sendMsg:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gD1-xz-1L9"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="调试模式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NE-Yg-dlt">
+                                <rect key="frame" x="20" y="390" width="269" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -65,6 +72,7 @@
                     <connections>
                         <outlet property="btnSend" destination="0Mm-Zb-SCd" id="gvE-2C-01n"/>
                         <outlet property="lblMsg" destination="S3o-3c-ZWu" id="yKr-oy-WEJ"/>
+                        <outlet property="lbl_debug" destination="6NE-Yg-dlt" id="3Qp-gW-CaM"/>
                         <outlet property="webView_h5" destination="FUv-IZ-bTW" id="Na1-mK-KaM"/>
                     </connections>
                 </viewController>
