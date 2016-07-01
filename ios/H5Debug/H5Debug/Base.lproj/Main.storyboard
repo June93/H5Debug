@@ -99,6 +99,7 @@
                             <constraint firstItem="FUv-IZ-bTW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="yTi-Bw-mrK"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="TWe-lF-zEx"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnSend" destination="0Mm-Zb-SCd" id="gvE-2C-01n"/>

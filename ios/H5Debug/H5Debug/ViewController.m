@@ -14,10 +14,16 @@
 #import "WebConsole.h"
 #import "PGToast.h"
 #import "Utility.h"
-
 #import "constant.h"
 
-@interface ViewController ()<EMChatManagerDelegate, UIWebViewDelegate>
+#import "NJKWebViewProgress.h"
+#import "NJKWebViewProgressView.h"
+
+@interface ViewController ()<EMChatManagerDelegate, UIWebViewDelegate, NJKWebViewProgressDelegate>
+{
+    NJKWebViewProgressView *_progressView;
+    NJKWebViewProgress *_progressProxy;
+}
 
 @end
 
@@ -48,6 +54,17 @@
     UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(exit_debug)];
     [_view_debug addGestureRecognizer:tapGr];
     
+    _progressProxy = [[NJKWebViewProgress alloc] init];
+    _webView_h5.delegate = _progressProxy;
+    _progressProxy.webViewProxyDelegate = self;
+    _progressProxy.progressDelegate = self;
+    
+    CGFloat progressBarHeight = 2.f;
+    CGRect navigationBarBounds = self.navigationController.navigationBar.bounds;
+    CGRect barFrame = CGRectMake(0, navigationBarBounds.size.height - progressBarHeight, navigationBarBounds.size.width, progressBarHeight);
+    _progressView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
+    _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    
     [WebConsole enable];
     
     [self loadH5:default_address];
@@ -59,9 +76,19 @@
     [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    //[_progressView setProgress:0 animated:YES];
+    [self.navigationController.navigationBar addSubview:_progressView];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [_progressView removeFromSuperview];
 }
 
 - (IBAction)btn_sendMsg:(id)sender
@@ -200,6 +227,14 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
     //
+}
+
+#pragma mark - NJKWebViewProgressDelegate
+-(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
+{
+    [_progressView setProgress:progress animated:YES];
+    
+    self.navigationItem.title = [_webView_h5 stringByEvaluatingJavaScriptFromString:@"document.title"];
 }
 
 #pragma mark - EMChatManagerDelegate
