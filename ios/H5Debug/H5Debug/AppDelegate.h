@@ -14,6 +14,10 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic) BOOL isDebug;
+
+@property (nonatomic, strong) NSString *targetUrl;
+
 - (void)sendMessage:(EMMessageBody *)body;
 
 - (void)logoutEM;

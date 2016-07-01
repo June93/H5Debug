@@ -92,9 +92,9 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    BOOL isExistTargetUrl = NO;
+    self.isDebug = YES;
     
-    NSString *targetUrl = @"";
+    BOOL isExistTargetUrl = NO;
     
     NSString *str_url = [url absoluteString];
     
@@ -123,7 +123,7 @@
                     
                     isExistTargetUrl = YES;
                     
-                    targetUrl = value;
+                    self.targetUrl = value;
                     
                     break;
                 }
@@ -132,24 +132,25 @@
     }
     
     //刷新
-    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
-    
-    if (nav.viewControllers == 0) {
-        return YES;
-    }
-    
-    ViewController *vc = (ViewController *)[nav.viewControllers objectAtIndex:0];
-    
-    if (isExistTargetUrl) {
-        
-        targetUrl = [targetUrl URLDecodedString];
-        
-        [vc loadH5:targetUrl];
-        
-    } else {
-        
-        [vc loadH5:default_address];
-    }
+//    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+//    
+//    if (nav.viewControllers == 0) {
+//        
+//        return YES;
+//    }
+//    
+//    ViewController *vc = (ViewController *)[nav.viewControllers objectAtIndex:0];
+//    
+//    if (isExistTargetUrl) {
+//        
+//        targetUrl = [targetUrl URLDecodedString];
+//        
+//        [vc loadH5:targetUrl];
+//        
+//    } else {
+//        
+//        [vc loadH5:default_address];
+//    }
     
     [self loginEM];
     

@@ -15,6 +15,7 @@
 #import "PGToast.h"
 #import "Utility.h"
 #import "constant.h"
+#import "NSString+URLEncoding.h"
 
 #import "NJKWebViewProgress.h"
 #import "NJKWebViewProgressView.h"
@@ -23,6 +24,8 @@
 {
     NJKWebViewProgressView *_progressView;
     NJKWebViewProgress *_progressProxy;
+    
+    UIButton *backBtn;
 }
 
 @end
@@ -38,11 +41,44 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+    [backBtn setExclusiveTouch:YES];
+    [backBtn addTarget:self action:@selector(back_click) forControlEvents:UIControlEventTouchUpInside];
+    [backBtn setImage:[UIImage imageNamed:@"btn_back"] forState:UIControlStateNormal];
+    [backBtn setTitleColor:[Utility colorFromHexRGB:@"249bff"] forState:UIControlStateNormal];
+    [backBtn setTitle:@"返回" forState:UIControlStateNormal];
+    backBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
+    backBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -22, 0, 0);
+    backBtn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    backBtn.hidden = YES;
+    
     _lblMsg.hidden = YES;
     _btnSend.hidden = YES;
     
-    _view_debug.hidden = YES;
-    _lbl_debug.hidden = YES;
+    AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (!appd.isDebug) {
+        
+        _view_debug.hidden = YES;
+        _lbl_debug.hidden = YES;
+        [self loadH5:default_address];
+        
+    } else {
+        
+        _view_debug.hidden = NO;
+        _lbl_debug.hidden = NO;
+        
+        if (appd.targetUrl && appd.targetUrl.length > 0) {
+            
+            appd.targetUrl = [appd.targetUrl URLDecodedString];
+            
+            [self loadH5:appd.targetUrl];
+            
+        } else {
+            
+            [self loadH5:default_address];
+        }
+    }
     
     _btn_reload.layer.cornerRadius = _btn_reload.frame.size.width/2.0;
     _btn_reload.layer.masksToBounds = YES;
@@ -66,8 +102,6 @@
     _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     
     [WebConsole enable];
-    
-    [self loadH5:default_address];
     
     //监听日志输出
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(send_console_log:) name:@"console_log" object:nil];
@@ -101,14 +135,15 @@
 
 - (IBAction)btn_reload_click:(id)sender
 {
-//    [_webView_h5 reload];
-    
-    NSString *current_address = _webView_h5.request.URL.absoluteString;
-    
-    [self loadH5:current_address];
+    [_webView_h5 reload];
 }
 
 #pragma mark - Selector
+- (void)back_click
+{
+    [self.webView_h5 goBack];
+}
+
 //加载指定页面
 - (void)loadH5:(NSString *)address
 {
@@ -122,6 +157,8 @@
     _lbl_debug.hidden = YES;
     
     AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    appd.isDebug = NO;
     
     EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"退出调试模式"];
     [appd sendMessage:body];
@@ -170,8 +207,10 @@
 {
     if (text.length == 0) {
         
-        PGToast *toast = [PGToast makeToast:@"无效指令"];
-        [toast show];
+        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"无效指令"];
+        
+        AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appd sendMessage:body];
         
         return;
     }
@@ -197,14 +236,18 @@
             
         } else {
             
-            PGToast *toast = [PGToast makeToast:@"无效指令"];
-            [toast show];
+            EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"无效指令"];
+            
+            AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appd sendMessage:body];
         }
         
     } else {
         
-        PGToast *toast = [PGToast makeToast:@"无效指令"];
-        [toast show];
+        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"无效指令"];
+        
+        AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appd sendMessage:body];
     }
     
 }
@@ -227,7 +270,7 @@
 #pragma mark - UIWebViewDelegate
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    //
+    backBtn.hidden = !_webView_h5.canGoBack;
 }
 
 #pragma mark - NJKWebViewProgressDelegate
