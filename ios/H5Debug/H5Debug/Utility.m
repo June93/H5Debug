@@ -27,7 +27,7 @@
     if(loc == NSNotFound)
     {
         //无参数
-        return [NSString stringWithFormat:@"?t=%@", timestamp];
+        return [NSString stringWithFormat:@"%@?t=%@", openUrl, timestamp];
     }
     else
     {
@@ -45,7 +45,8 @@
             }
         }
         
-        return [NSString stringWithFormat:@"&t=%@", timestamp];
+//        NSString *result = [domain stringByAppendingString:@"__from=wzs"];
+        return [NSString stringWithFormat:@"%@&t=%@", domain, timestamp];
     }
 }
 
