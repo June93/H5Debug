@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "EMMessageBody.h"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-- (void)sendMessage:(NSString *)content;
+- (void)sendMessage:(EMMessageBody *)body;
 
 @end
 

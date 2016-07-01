@@ -149,7 +149,8 @@
         
         [[EMClient sharedClient].options setIsAutoLogin:NO];
         
-        [self sendMessage:[self getDeviceInfo]];
+        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:[self getDeviceInfo]];
+        [self sendMessage:body];
         
     } else {
         
@@ -157,7 +158,7 @@
     }
 }
 
-- (void)sendMessage:(NSString *)content
+- (void)sendMessage:(EMMessageBody *)body
 {
     EMError *error = nil;
     NSArray *userlist = [[EMClient sharedClient].contactManager getContactsFromServerWithError:&error];
@@ -167,7 +168,6 @@
     
     EMConversation *ems = [[EMClient sharedClient].chatManager getConversation:@"web" type:EMConversationTypeChat createIfNotExist:YES];
     
-    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:content];
     NSString *from = [[EMClient sharedClient] currentUsername];
     
     EMMessage *message = [[EMMessage alloc] initWithConversationID:ems.conversationId from:from to:ems.conversationId body:body ext:nil];

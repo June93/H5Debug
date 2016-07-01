@@ -14,6 +14,9 @@
 #import "WebConsole.h"
 #import "PGToast.h"
 
+#define kScreenWidth  [[UIScreen mainScreen] bounds].size.width
+#define kScreenHeight [[UIScreen mainScreen] bounds].size.height
+
 #define default_address @"http://10.5.103.69:8081/h5debug/phone/index.html"
 
 @interface ViewController ()<EMChatManagerDelegate, UIWebViewDelegate>
@@ -30,6 +33,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    _lblMsg.hidden = YES;
+    _btnSend.hidden = YES;
     
     [WebConsole enable];
     
@@ -51,7 +57,8 @@
 {
     AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    [appd sendMessage:@"from iphone message"];
+    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"from iphone message"];
+    [appd sendMessage:body];
 }
 
 #pragma mark - Selector
@@ -66,9 +73,10 @@
 {
     NSString *log = (NSString *)[notify object];
     
-    AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:log];
     
-    [appd sendMessage:log];
+    AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appd sendMessage:body];
 }
 
 - (void)excuteJS:(NSString *)js
@@ -78,6 +86,58 @@
     NSString *str = [_webView_h5 stringByEvaluatingJavaScriptFromString:js_handle];
     
     NSLog(@"%@", str);
+}
+
+- (NSData *)screenShot
+{
+    self.view.backgroundColor = [UIColor greenColor];
+    
+    UIWindow *screenWindow = [[UIApplication sharedApplication] keyWindow];
+    
+    UIGraphicsBeginImageContext(screenWindow.frame.size);
+    
+    [screenWindow.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage * viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return UIImageJPEGRepresentation(viewImage, 0.8);
+}
+
+- (void)parseMessage:(NSString *)text
+{
+    if (text.length == 0) {
+        return;
+    }
+    
+    NSArray *arr_components = [text componentsSeparatedByString:@":"];
+    
+    if (arr_components.count == 2) {
+        
+        NSString *key = [arr_components objectAtIndex:0];
+        
+        NSString *value = [arr_components objectAtIndex:1];
+        
+        if ([key isEqualToString:@"javascript"]) {
+            
+            [self excuteJS:value];
+            
+        } else if ([key isEqualToString:@"control"]) {
+            
+            if ([value isEqualToString:@"screen shot"]) {
+                
+                EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithData:[self screenShot] displayName:@"screenShot.jpg"];
+                
+                AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                [appd sendMessage:body];
+            }
+            
+        } else {
+            
+            
+        }
+    }
 }
 
 #pragma mark - UIWebViewDelegate
@@ -104,7 +164,7 @@
                 
                 _lblMsg.text = txt;
                 
-                [self excuteJS:txt];
+                [self parseMessage:txt];
             }
                 
                 break;
