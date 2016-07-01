@@ -17,6 +17,7 @@
 #import "NSString+URLEncoding.h"
 #import "GBDeviceInfo.h"
 #import "OpenUDID.h"
+#import "Utility.h"
 
 #import "constant.h"
 
@@ -127,7 +128,7 @@
         
         targetUrl = [targetUrl URLDecodedString];
         
-        [vc loadH5:targetUrl];
+        [vc loadH5:[Utility makeUrl:targetUrl] ];
         
     } else {
         

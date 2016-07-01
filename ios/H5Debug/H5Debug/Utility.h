@@ -10,4 +10,6 @@
 
 @interface Utility : NSObject
 
++ (NSString *)makeUrl:(NSString *)openUrl;
+
 @end

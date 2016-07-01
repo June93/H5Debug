@@ -10,4 +10,44 @@
 
 @implementation Utility
 
++ (NSString *)makeUrl:(NSString *)openUrl
+{
+    if (![openUrl isKindOfClass:[NSString class]] || openUrl.length == 0) {
+        return @"";
+    }
+    
+    if (![openUrl hasPrefix:@"http://"] && ![openUrl hasPrefix:@"https://"]) {
+        
+        openUrl = [NSString stringWithFormat:@"http://%@", openUrl];
+    }
+    
+    NSString *timestamp = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]*1000];
+    
+    NSUInteger loc = [openUrl rangeOfString:@"?"].location;
+    if(loc == NSNotFound)
+    {
+        //无参数
+        return [NSString stringWithFormat:@"?t=%@", timestamp];
+    }
+    else
+    {
+        // 有参数
+        NSString *domain,*args;
+        domain = [openUrl substringToIndex:loc+1];
+        args = [openUrl substringFromIndex:loc+1];
+        
+        if(args.length)
+        {
+            NSMutableArray *ar = [NSMutableArray arrayWithArray:[args componentsSeparatedByString:@"&"]];
+            for (NSString *arg in ar)
+            {
+                domain = [domain stringByAppendingFormat:@"%@&",arg];
+            }
+        }
+        
+        return [NSString stringWithFormat:@"&t=%@", timestamp];
+    }
+}
+
+
 @end
