@@ -80,7 +80,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
--(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     BOOL isExistTargetUrl = NO;
     
@@ -121,7 +121,7 @@
         }
     }
     
-    //刷新 
+    //刷新
     ViewController *vc = (ViewController *)self.window.rootViewController;
     
     if (isExistTargetUrl) {
