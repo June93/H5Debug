@@ -16,5 +16,7 @@
 
 - (void)sendMessage:(EMMessageBody *)body;
 
+- (void)logoutEM;
+
 @end
 

@@ -33,9 +33,14 @@
     
     _lblMsg.hidden = YES;
     _btnSend.hidden = YES;
+    
+    _view_debug.hidden = YES;
     _lbl_debug.hidden = YES;
     
     [_lbl_debug.layer addAnimation:[self opacityForever_Animation:1] forKey:nil];
+    
+    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(exit_debug)];
+    [_view_debug addGestureRecognizer:tapGr];
     
     [WebConsole enable];
     
@@ -67,6 +72,19 @@
 {
     NSURL *url = [[NSURL alloc]initWithString:address];
     [_webView_h5 loadRequest:[NSURLRequest requestWithURL:url]];
+}
+
+- (void)exit_debug
+{
+    _view_debug.hidden = YES;
+    _lbl_debug.hidden = YES;
+    
+    //退出环信
+    AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appd logoutEM];
+    
+    PGToast *toast = [PGToast makeToast:@"断开调试模式"];
+    [toast show];
 }
 
 - (void)send_console_log:(NSNotification *)notify

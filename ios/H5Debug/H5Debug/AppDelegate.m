@@ -155,9 +155,21 @@
         EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:[self getDeviceInfo]];
         [self sendMessage:body];
         
+        ViewController *vc = (ViewController *)self.window.rootViewController;
+        vc.lbl_debug.hidden = NO;
+        vc.view_debug.hidden = NO;
+        
     } else {
         
         NSLog(@"%@", error.errorDescription);
+    }
+}
+
+- (void)logoutEM
+{
+    EMError *error = [[EMClient sharedClient] logout:YES];
+    if (!error) {
+        NSLog(@"退出成功");
     }
 }
 
