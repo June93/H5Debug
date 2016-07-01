@@ -28,18 +28,14 @@
     <script src="static/js/jquery.qrcode.min.js">
     </script>
 
-     <script type="text/JavaScript">
-        var genarateQrcode = function(){
-        var url=$('input[id=getval]').val();
-        console.log('genarateQrcode.....url='+url+" encodeURIComponent="+encodeURIComponent(url));
-        var finalUrl="http://10.5.103.69:8081/h5debug/h5debug.html?targetUrl="+encodeURIComponent(url);
-        $('#qrcode').empty();
-        jQuery('#qrcode').qrcode(finalUrl);
-     }
+    <script type="text/JavaScript">
+        var genarateQrcode = function(){ var url=$('input[id=getval]').val(); console.log('genarateQrcode.....url='+url+" encodeURIComponent="+encodeURIComponent(url)); var finalUrl="http://10.5.103.69:8081/h5debug/h5debug.html?targetUrl="+encodeURIComponent(url);
+        $('#qrcode').empty(); jQuery('#qrcode').qrcode(finalUrl); }
     </script>
     <link rel="stylesheet" href="static/css/bootstrap.css">
     <link rel="stylesheet" href="static/css/webim.css">
     <style>
+
     </style>
 </head>
 
@@ -119,13 +115,13 @@ href="#"></a></span></div>
                 <div style="clear: both;"></div>
             </div>
         </div>
-        <div class="leftQrcode"><img src="qrcode/1.png" width="250px" height="250px"/></div>
-        <div class="rightQrcode" id="qrcode"><img src="qrcode/2.png" width="250px" height="250px"/></div>
+        <div class="leftQrcode"><img src="qrcode/1.png" width="250px" height="250px" /></div>
+        <div class="rightQrcode" id="qrcode"><img src="qrcode/2.png" width="250px" height="250px" /></div>
         <div class="qrCodeGenerate1">
-              <input type="text" id="getval" value='http://10.5.103.69:8081/h5debug/phone/dev.html'/>
+            <input type="text" id="getval" value='http://10.5.103.69:8081/h5debug/phone/dev.html' />
         </div>
         <div class="qrCodeGenerate2">
-             <input type="button" onclick="genarateQrcode()" value="生成二维码" class="btn btn-small btn-info">
+            <input type="button" onclick="genarateQrcode()" value="生成二维码" class="btn btn-small btn-info">
         </div>
     </div>
     <script src="static/js/webim.js">

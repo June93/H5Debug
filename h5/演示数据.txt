@@ -1,0 +1,25 @@
+1、web端调试地址:http://10.5.103.69:8081/h5debug/index.html  账号web 密码123456
+2、正常启动APP，介绍H5界面功能
+3、扫描左侧二维码，进入调试模式，讲解调试模式下的不同之处，分别点击两个按钮查看日志效果
+4、调试端执行 JS :
+   1、alert("hello world!")
+   2、
+    2.1、function add(a,b){
+        var sum=a-b;
+        log(a+'+'+b+'='+sum);
+        return sum;
+      }
+	2.2、add(1,1)
+	2.3、function add(a,b){
+        var sum=a+b;
+        log(a+'+'+b+'='+sum);
+        return sum;
+      }
+	2.4、add(1,1)
+
+5、扫描右侧二维码,连接到开发环境
+   1、修改开发环境代码，phone\dev.html, var sum=a+b;，
+   2、手机刷新当前页面，再点击操作按钮查看效果
+   3、测试一下 JS命令  window.location.reload() 刷新当前页面
+   4、测试一下 JS命令  window.location.href="http://www.baidu.com" 打开百度
+   5、测试一下Control指令 screen shot

@@ -11,8 +11,8 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    height:39px;
-    width:219px;
+    height: 39px;
+    width: 219px;
     display: inline-block;
     outline: 0;
     border: 0;
@@ -73,8 +73,8 @@ a:hover {
     text-decoration: underline;
     color: #f60;
 }
-.accordion-group{
-  border: 0 none;
+.accordion-group {
+    border: 0 none;
 }
 .content {
     width: 1000px;
@@ -115,7 +115,7 @@ a:hover {
 .login_user_title {
     display: -moz-inline-box;
     display: inline-block;
-    margin-top:10px
+    margin-top: 10px
 }
 .leftheader-font {
     font-size: 14px;
@@ -147,11 +147,10 @@ a:hover {
     background-color: #1874CD;
     height: 42px;
 }
-.chat01_title ul{
-  margin: 0;
-  padding: 0 10px
+.chat01_title ul {
+    margin: 0;
+    padding: 0 10px
 }
-
 .chat03_title {
     background-color: #1874CD;
     height: 30px;
@@ -203,15 +202,15 @@ a:hover {
     text-align: right;
     padding-right: 15px;
 }
-.chat02_bar *{
-  vertical-align: middle;
+.chat02_bar * {
+    vertical-align: middle;
 }
-.chat02_bar label{
-  display:inline-block;
-  margin: 0 10px 0 0;
+.chat02_bar label {
+    display: inline-block;
+    margin: 0 10px 0 0;
 }
-.chat02_bar input{
-  margin: 0;
+.chat02_bar input {
+    margin: 0;
 }
 .chat03_title_t {
     background: url('../img/icon.png') no-repeat 0px -370px;
@@ -243,8 +242,8 @@ a:hover {
     position: relative;
     resize: none;
 }
-.chat03_content_ul li{
-  cursor: pointer;
+.chat03_content_ul li {
+    cursor: pointer;
 }
 .chat03_content_ul li> span {
     display: inline-block;
@@ -557,7 +556,6 @@ body {
     -ms-text-size-adjust: none;
     -o-text-size-adjust: none;
     text-size-adjust: none;
-
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -webkit-tap-highlight-color: transparent;
 }
@@ -1299,26 +1297,26 @@ footer {
 .emim-msg-status {
     color: rgb(255, 42, 0);
 }
-.leftQrcode{
+.leftQrcode {
     position: absolute;
-      top: 50px;
-      left: -155px;
+    top: 50px;
+    left: -155px;
 }
-.rightQrcode{
-  position: absolute;
+.rightQrcode {
+    position: absolute;
     top: 50px;
     right: -175px;
 }
-.qrCodeGenerate1{
-  position: absolute;
+.qrCodeGenerate1 {
+    position: absolute;
     top: 320px;
     right: -175px;
 }
-.qrCodeGenerate1 input{
-   width:238px;
+.qrCodeGenerate1 input {
+    width: 238px;
 }
-.qrCodeGenerate2{
-  position: absolute;
+.qrCodeGenerate2 {
+    position: absolute;
     top: 361px;
     right: -175px;
 }
