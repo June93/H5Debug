@@ -169,35 +169,31 @@
 - (void)parseMessage:(NSString *)text
 {
     if (text.length == 0) {
+        
+        PGToast *toast = [PGToast makeToast:@"无效指令"];
+        [toast show];
+        
         return;
     }
     
-    NSArray *arr_components = [text componentsSeparatedByString:@":"];
-    
-    if (arr_components.count == 2) {
+    if ([text hasPrefix:@"javascript:"]) {
         
-        NSString *key = [arr_components objectAtIndex:0];
+//        NSString *value = [text substringFromIndex:11];
+       NSString *value = [text stringByReplacingOccurrencesOfString:@"javascript:" withString:@""];
         
-        NSString *value = [arr_components objectAtIndex:1];
+        [self excuteJS:value];
         
-        if ([key isEqualToString:@"javascript"]) {
+    } else if ([text hasPrefix:@"control:"]) {
+        
+//        NSString *value = [text substringFromIndex:8];
+        NSString *value = [text stringByReplacingOccurrencesOfString:@"control:" withString:@""];
+        
+        if ([value isEqualToString:@"screen shot"]) {
             
-            [self excuteJS:value];
+            EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithData:[self screenShot] displayName:@"screenShot.jpg"];
             
-        } else if ([key isEqualToString:@"control"]) {
-            
-            if ([value isEqualToString:@"screen shot"]) {
-                
-                EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithData:[self screenShot] displayName:@"screenShot.jpg"];
-                
-                AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                [appd sendMessage:body];
-                
-            } else {
-                
-                PGToast *toast = [PGToast makeToast:@"无效指令"];
-                [toast show];
-            }
+            AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appd sendMessage:body];
             
         } else {
             
@@ -210,6 +206,7 @@
         PGToast *toast = [PGToast makeToast:@"无效指令"];
         [toast show];
     }
+    
 }
 
 -(CABasicAnimation *)opacityForever_Animation:(float)time
