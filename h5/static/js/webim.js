@@ -81,7 +81,7 @@ var uploadShim = function ( fileInputId, type ) {
 		return;
 	}
 
-	return new SWFUpload({ 
+	return new SWFUpload({
 		file_post_name: 'file'
 		, flash_url: "static/js/swfupload/swfupload.swf"
 		, button_placeholder_id: fileInputId
@@ -133,8 +133,8 @@ var uploadShim = function ( fileInputId, type ) {
 			}
 		}
 		, upload_error_handler: function ( file, code, msg ) {
-			if ( code != SWFUpload.UPLOAD_ERROR.FILE_CANCELLED 
-			&& code != SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED 
+			if ( code != SWFUpload.UPLOAD_ERROR.FILE_CANCELLED
+			&& code != SWFUpload.UPLOAD_ERROR.UPLOAD_LIMIT_EXCEEDED
 			&& code != SWFUpload.UPLOAD_ERROR.FILE_VALIDATION_FAILED ) {
 				this.uploadOptions.onFileUploadError && this.uploadOptions.onFileUploadError({ type: EASEMOB_IM_UPLOADFILE_ERROR, msg: msg });
 			}
@@ -146,7 +146,7 @@ var uploadShim = function ( fileInputId, type ) {
 			//处理上传成功的回调
 			try{
 				var res = Easemob.im.Helper.parseUploadResponse(response);
-				
+
 				res = $.parseJSON(res);
 				res.filename = file.name;
 				this.uploadOptions.onFileUploadComplete && this.uploadOptions.onFileUploadComplete(res);
@@ -206,7 +206,7 @@ var getPageCount = function () {
 	if ( Easemob.im.config.multiResources && window.localStorage ) {
 		for ( var o in localStorage ) {
 			if ( localStorage.hasOwnProperty(o) && /^empagecount/.test(o.toString()) ) {
-				sum++;		
+				sum++;
 			}
 		}
 	}
@@ -309,7 +309,7 @@ $(document).ready(function() {
 		}
 	}());*/
 
-	
+
 	conn = new Easemob.im.Connection({
 		multiResources: Easemob.im.config.multiResources,
 		https : Easemob.im.config.https,
@@ -536,7 +536,7 @@ var handlePresence = function(e) {
 				return;
 			}
 		}
-        
+
 		var subscribeMessage = e.from + "请求加你为好友。\n验证消息：" + e.status;
 		var cur = showNewNotice(subscribeMessage, e);
 		cur && cur.find('.confirmButton').click(function() {
@@ -681,7 +681,9 @@ var handleRoster = function(rosterMsg) {
 					chooseContactDivClick(this);
 				});
 				$('<img>').attr({
-					"src" : "static/img/head/contact_normal.png"
+					"src" : "static/img/head/contact_normal.png",
+					"width":48,
+					"height":48
 				}).appendTo(lielem);
 				$('<span>').html(contact.name).appendTo(lielem);
 				$('#contactlistUL').append(lielem);
@@ -772,7 +774,7 @@ var login = function() {
 			conn.open({
 				apiUrl : Easemob.im.config.apiURL,
 				user : user,
-				accessToken : token,    
+				accessToken : token,
 				//连接时提供appkey
 				appKey : Easemob.im.config.appkey
 			});
@@ -792,7 +794,7 @@ var login = function() {
 				pwd : pass,
 				//连接时提供appkey
 				appKey : Easemob.im.config.appkey
-			});         
+			});
 		}
 		return false;
 	}, 50);
@@ -870,7 +872,11 @@ var buildContactDiv = function(contactlistDivId, roster) {
 		}).click(function() {
 			chooseContactDivClick(this);
 		});
-		$('<img>').attr("src", "static/img/head/contact_normal.png").appendTo(
+		$('<img>').attr({
+					"src" : "static/img/head/contact_normal.png",
+					"width":48,
+					"height":48
+				}).appendTo(
 				lielem);
 		$('<span>').html(userName).appendTo(lielem);
 		$('#contactlistUL').append(lielem);
@@ -962,7 +968,7 @@ var showContactChatDiv = function(chatUserId) {
 		curChatRoomId = $(contactLi).attr('roomid');
 		$("#roomMemberImg").css('display', 'block');
 	} else {
-		dispalyTitle = "与" + chatUserId + "聊天中";
+		dispalyTitle = "调试【" + chatUserId + "】中";
 		$("#roomMemberImg").css('display', 'none');
 	}
     var title = $('#' + talkToDivId).find('a');
@@ -1104,12 +1110,19 @@ var sendText = function() {
 	if (textSending) {
 		return;
 	}
+	var type = $('input[name=sendType]:checked').val();
 	textSending = true;
 	var msgInput = document.getElementById(talkInputId);
 	var msg = msgInput.value;
 	if (msg == null || msg.length == 0) {
 		textSending = false;
 		return;
+	}
+	//控制命令
+	if(type==1){
+        msg="control:"+msg;
+	}else{//JAVASCRIPT
+        msg="javascript:"+msg;
 	}
 	var to = curChatUserId;
 	if (to == null) {
@@ -1301,7 +1314,7 @@ var sendAudio = function() {
 			opt.type = groupFlagMark;
 			opt.to = curRoomId;
 		} else if (curChatUserId.indexOf(chatRoomMark) >= 0) {
-			
+
 			opt.type = groupFlagMark;
 			opt.roomType = chatRoomMark;
 			opt.to = curChatRoomId;
@@ -1433,7 +1446,7 @@ var handleAudioMessage = function(message) {
 		contactDivId = mestype + message.to;
 	}
 
-	
+
 	var audio = document.createElement("audio");
 	audio.controls = "controls";
 	audio.innerHTML = "当前浏览器不支持播放此音频:" + filename;
@@ -1503,7 +1516,7 @@ var handleVideoMessage = function(message) {
 		contactDivId = mestype + message.to;
 	}
 	var options = message;
-	
+
 	var video = document.createElement("video");
 	video.controls = "controls";
 	video.src = message.url;
@@ -1641,7 +1654,7 @@ var appendMsg = function(who, contact, message, onlyPrompt) {
 		var msg = messageContent[i];
 		var type = msg.type;
 		var data = msg.data;
-		
+
 		if (type == "emotion") {
 			var ele = $("<p><img src='" + data + "'/></p>");
 			ele.attr("class", "chat-content-p3");
@@ -1719,7 +1732,7 @@ var appendMsg = function(who, contact, message, onlyPrompt) {
 			playAudioShim(d.find('.'+t), data.currentSrc, t);
 		}, 0);
 	}
-    
+
 	msgContentDiv.scrollTop = msgContentDiv.scrollHeight;
 	return lineDiv;
 };
@@ -1879,7 +1892,8 @@ var removeFriendDomElement = function(userToDel, local) {
 			$(currentDiv).css({
 				"display" : "block"
 			});
-			displayName = '与' + curChatUserId + '聊天中';
+			displayName = "调试【" + chatUserId + "】中";
+
 		} else {
 			$('#null-nouser').css({
 				"display" : "block"
@@ -1968,8 +1982,27 @@ var getLoacalTimeString = function getLoacalTimeString() {
 	var date = new Date();
 	var time = date.getHours() + ":" + date.getMinutes() + ":"
 			+ date.getSeconds();
-	return time;
+	return formatTime(new Date(),"yyyy-MM-dd hh:mm:ss");
 }
+
+var formatTime = function(date,fmt)   
+{ //author: meizz   
+  var o = {   
+    "M+" : date.getMonth()+1,                 //月份   
+    "d+" : date.getDate(),                    //日   
+    "h+" : date.getHours(),                   //小时   
+    "m+" : date.getMinutes(),                 //分   
+    "s+" : date.getSeconds(),                 //秒   
+    "q+" : Math.floor((date.getMonth()+3)/3), //季度   
+    "S"  : date.getMilliseconds()             //毫秒   
+  };   
+  if(/(y+)/.test(fmt))   
+    fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));   
+  for(var k in o)   
+    if(new RegExp("("+ k +")").test(fmt))   
+  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
+  return fmt;   
+}  
 
 
 Easemob.im.EMOTIONS = {
