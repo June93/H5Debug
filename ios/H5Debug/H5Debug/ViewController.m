@@ -161,12 +161,23 @@
                 
                 AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                 [appd sendMessage:body];
+                
+            } else {
+                
+                PGToast *toast = [PGToast makeToast:@"无效指令"];
+                [toast show];
             }
             
         } else {
             
-            
+            PGToast *toast = [PGToast makeToast:@"无效指令"];
+            [toast show];
         }
+        
+    } else {
+        
+        PGToast *toast = [PGToast makeToast:@"无效指令"];
+        [toast show];
     }
 }
 
