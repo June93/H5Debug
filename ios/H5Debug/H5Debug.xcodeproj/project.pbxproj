@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28B392341D2616B90024332E /* GBDeviceInfo_Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B392291D2616B90024332E /* GBDeviceInfo_Common.m */; };
+		28B392351D2616B90024332E /* GBDeviceInfo_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3922B1D2616B90024332E /* GBDeviceInfo_iOS.m */; };
+		28B392381D26173C0024332E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28B392371D26173C0024332E /* Foundation.framework */; };
+		28B3923B1D261FCC0024332E /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B3923A1D261FCC0024332E /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C33F5D921D22729600E7F4AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F5D911D22729600E7F4AC /* main.m */; };
 		C33F5D951D22729600E7F4AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F5D941D22729600E7F4AC /* AppDelegate.m */; };
 		C33F5D981D22729600E7F4AC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F5D971D22729600E7F4AC /* ViewController.m */; };
@@ -33,6 +37,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28B392261D2616B90024332E /* GBDeviceInfo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBDeviceInfo-Prefix.pch"; sourceTree = "<group>"; };
+		28B392271D2616B90024332E /* GBDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo.h; sourceTree = "<group>"; };
+		28B392281D2616B90024332E /* GBDeviceInfo_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo_Common.h; sourceTree = "<group>"; };
+		28B392291D2616B90024332E /* GBDeviceInfo_Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDeviceInfo_Common.m; sourceTree = "<group>"; };
+		28B3922A1D2616B90024332E /* GBDeviceInfo_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo_iOS.h; sourceTree = "<group>"; };
+		28B3922B1D2616B90024332E /* GBDeviceInfo_iOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBDeviceInfo_iOS.m; sourceTree = "<group>"; };
+		28B3922E1D2616B90024332E /* GBDeviceInfo_Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfo_Subclass.h; sourceTree = "<group>"; };
+		28B3922F1D2616B90024332E /* GBDeviceInfoInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfoInterface.h; sourceTree = "<group>"; };
+		28B392301D2616B90024332E /* GBDeviceInfoTypes_Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfoTypes_Common.h; sourceTree = "<group>"; };
+		28B392311D2616B90024332E /* GBDeviceInfoTypes_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBDeviceInfoTypes_iOS.h; sourceTree = "<group>"; };
+		28B392371D26173C0024332E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		28B392391D261FCC0024332E /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		28B3923A1D261FCC0024332E /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		C33F5D8D1D22729600E7F4AC /* H5Debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = H5Debug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33F5D911D22729600E7F4AC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C33F5D931D22729600E7F4AC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -108,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B392381D26173C0024332E /* Foundation.framework in Frameworks */,
 				C33F5E8A1D23674100E7F4AC /* libsqlite3.tbd in Frameworks */,
 				C33F5E881D23673600E7F4AC /* libstdc++.6.0.9.tbd in Frameworks */,
 				C33F5E861D23672F00E7F4AC /* libc++.tbd in Frameworks */,
@@ -128,9 +146,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28B392241D2616B90024332E /* GBDeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+				28B392261D2616B90024332E /* GBDeviceInfo-Prefix.pch */,
+				28B392271D2616B90024332E /* GBDeviceInfo.h */,
+				28B392281D2616B90024332E /* GBDeviceInfo_Common.h */,
+				28B392291D2616B90024332E /* GBDeviceInfo_Common.m */,
+				28B3922A1D2616B90024332E /* GBDeviceInfo_iOS.h */,
+				28B3922B1D2616B90024332E /* GBDeviceInfo_iOS.m */,
+				28B3922E1D2616B90024332E /* GBDeviceInfo_Subclass.h */,
+				28B3922F1D2616B90024332E /* GBDeviceInfoInterface.h */,
+				28B392301D2616B90024332E /* GBDeviceInfoTypes_Common.h */,
+				28B392311D2616B90024332E /* GBDeviceInfoTypes_iOS.h */,
+			);
+			path = GBDeviceInfo;
+			sourceTree = "<group>";
+		};
 		C33F5D841D22729600E7F4AC = {
 			isa = PBXGroup;
 			children = (
+				28B392371D26173C0024332E /* Foundation.framework */,
 				C33F5E891D23674100E7F4AC /* libsqlite3.tbd */,
 				C33F5E871D23673600E7F4AC /* libstdc++.6.0.9.tbd */,
 				C33F5E851D23672F00E7F4AC /* libc++.tbd */,
@@ -157,6 +193,9 @@
 		C33F5D8F1D22729600E7F4AC /* H5Debug */ = {
 			isa = PBXGroup;
 			children = (
+				28B392391D261FCC0024332E /* OpenUDID.h */,
+				28B3923A1D261FCC0024332E /* OpenUDID.m */,
+				28B392241D2616B90024332E /* GBDeviceInfo */,
 				C33F5E451D23643D00E7F4AC /* HyphenateSDK */,
 				C33F5D931D22729600E7F4AC /* AppDelegate.h */,
 				C33F5D941D22729600E7F4AC /* AppDelegate.m */,
@@ -329,9 +368,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28B392341D2616B90024332E /* GBDeviceInfo_Common.m in Sources */,
 				C36810BC1D23D51C00D2CD0F /* NSString+URLEncoding.m in Sources */,
 				C33F5E911D23ADBB00E7F4AC /* WebConsole.m in Sources */,
+				28B3923B1D261FCC0024332E /* OpenUDID.m in Sources */,
 				C36810B91D23D4B300D2CD0F /* PGToast.m in Sources */,
+				28B392351D2616B90024332E /* GBDeviceInfo_iOS.m in Sources */,
 				C33F5D981D22729600E7F4AC /* ViewController.m in Sources */,
 				C33F5D951D22729600E7F4AC /* AppDelegate.m in Sources */,
 				C33F5D921D22729600E7F4AC /* main.m in Sources */,
@@ -449,7 +491,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Haibin Chen (8W822X45X6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Haibin Chen (8W822X45X6)";
 				ENABLE_BITCODE = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = H5Debug/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -469,7 +513,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Haibin Chen (8W822X45X6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Haibin Chen (8W822X45X6)";
 				ENABLE_BITCODE = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = H5Debug/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

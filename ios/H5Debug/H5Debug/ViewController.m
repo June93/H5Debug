@@ -8,13 +8,10 @@
 
 #import "ViewController.h"
 
+#import "AppDelegate.h"
 #import "EMClient.h"
 #import "EMMessageBody.h"
-#import "EMTextMessageBody.h"
-#import "EMConversation.h"
-
 #import "WebConsole.h"
-
 #import "PGToast.h"
 
 #define default_address @"http://10.5.103.69:8081/h5debug/phone/index.html"
@@ -52,7 +49,9 @@
 
 - (IBAction)btn_sendMsg:(id)sender
 {
-    [self sendMessage:@"from iphone message"];
+    AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    [appd sendMessage:@"from iphone message"];
 }
 
 #pragma mark - Selector
@@ -67,40 +66,9 @@
 {
     NSString *log = (NSString *)[notify object];
     
-    [self sendMessage:log];
-}
-
-- (void)sendMessage:(NSString *)content
-{
-    EMError *error = nil;
-    NSArray *userlist = [[EMClient sharedClient].contactManager getContactsFromServerWithError:&error];
-    if (!error) {
-        NSLog(@"获取成功 -- %@",userlist);
-    }
+    AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    EMConversation *ems = [[EMClient sharedClient].chatManager getConversation:@"web" type:EMConversationTypeChat createIfNotExist:YES];
-    
-    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:content];
-    NSString *from = [[EMClient sharedClient] currentUsername];
-    
-    EMMessage *message = [[EMMessage alloc] initWithConversationID:ems.conversationId from:from to:ems.conversationId body:body ext:nil];
-    message.chatType = EMChatTypeChat; // 设置为单聊消息
-    
-    [[[EMClient sharedClient] chatManager] asyncSendMessage:message progress:^(int progress) {
-        
-        //
-        
-    } completion:^(EMMessage *message, EMError *error) {
-        
-        if (!error) {
-            
-            NSLog(@"消息发送成功");
-            
-            PGToast *toast = [PGToast makeToast:@"消息发送成功"];
-            [toast show];
-        }
-        
-    }];
+    [appd sendMessage:log];
 }
 
 - (void)excuteJS:(NSString *)js

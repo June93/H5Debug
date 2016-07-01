@@ -10,11 +10,13 @@
 
 #import "EMSDK.h"
 
+#import "EMTextMessageBody.h"
+#import "EMConversation.h"
 #import "ViewController.h"
-
 #import "PGToast.h"
-
 #import "NSString+URLEncoding.h"
+#import "GBDeviceInfo.h"
+#import "OpenUDID.h"
 
 @interface AppDelegate ()
 
@@ -40,12 +42,31 @@
         
         [[EMClient sharedClient].options setIsAutoLogin:YES];
         
+        [self sendMessage:[self getDeviceInfo]];
+        
     } else {
         
         NSLog(@"%@", error.errorDescription);
     }
     
     return YES;
+}
+
+- (NSString *)getDeviceInfo
+{
+    NSString *device_modal = [GBDeviceInfo deviceInfo].modelString;
+    
+    NSString *device_version = [[UIDevice currentDevice] systemVersion];
+    
+    // app版本
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *app_version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    
+    NSString *device_id = [OpenUDID value];
+    
+    NSString *result = [NSString stringWithFormat:@"设备名称：%@，系统版本：%@，APP版本：%@，设备ID：%@", device_modal, device_version, app_version, device_id];
+    
+    return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -129,6 +150,39 @@
     }
     
     return YES;
+}
+
+- (void)sendMessage:(NSString *)content
+{
+    EMError *error = nil;
+    NSArray *userlist = [[EMClient sharedClient].contactManager getContactsFromServerWithError:&error];
+    if (!error) {
+        NSLog(@"获取成功 -- %@",userlist);
+    }
+    
+    EMConversation *ems = [[EMClient sharedClient].chatManager getConversation:@"web" type:EMConversationTypeChat createIfNotExist:YES];
+    
+    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:content];
+    NSString *from = [[EMClient sharedClient] currentUsername];
+    
+    EMMessage *message = [[EMMessage alloc] initWithConversationID:ems.conversationId from:from to:ems.conversationId body:body ext:nil];
+    message.chatType = EMChatTypeChat; // 设置为单聊消息
+    
+    [[[EMClient sharedClient] chatManager] asyncSendMessage:message progress:^(int progress) {
+        
+        //
+        
+    } completion:^(EMMessage *message, EMError *error) {
+        
+        if (!error) {
+            
+            NSLog(@"消息发送成功");
+            
+            PGToast *toast = [PGToast makeToast:@"消息发送成功"];
+            [toast show];
+        }
+        
+    }];
 }
 
 @end
