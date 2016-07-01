@@ -132,7 +132,13 @@
     }
     
     //刷新
-    ViewController *vc = (ViewController *)self.window.rootViewController;
+    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+    
+    if (nav.viewControllers == 0) {
+        return YES;
+    }
+    
+    ViewController *vc = (ViewController *)[nav.viewControllers objectAtIndex:0];
     
     if (isExistTargetUrl) {
         
@@ -165,9 +171,13 @@
         EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:[self getDeviceInfo]];
         [self sendMessage:body];
         
-        ViewController *vc = (ViewController *)self.window.rootViewController;
-        vc.lbl_debug.hidden = NO;
-        vc.view_debug.hidden = NO;
+        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+        if (nav.viewControllers) {
+            
+            ViewController *vc = (ViewController *)[nav.viewControllers objectAtIndex:0];
+            vc.lbl_debug.hidden = NO;
+            vc.view_debug.hidden = NO;
+        }
         
     } else {
         
