@@ -23,5 +23,7 @@
 
 - (void)loadH5:(NSString *)address;
 
+- (void)loadTargetH5;
+
 @end
 

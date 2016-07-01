@@ -56,34 +56,14 @@
     _lblMsg.hidden = YES;
     _btnSend.hidden = YES;
     
-    AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (!appd.isDebug) {
-        
-        _view_debug.hidden = YES;
-        _lbl_debug.hidden = YES;
-        [self loadH5:default_address];
-        
-    } else {
-        
-        _view_debug.hidden = NO;
-        _lbl_debug.hidden = NO;
-        
-        if (appd.targetUrl && appd.targetUrl.length > 0) {
-            
-            appd.targetUrl = [appd.targetUrl URLDecodedString];
-            
-            [self loadH5:appd.targetUrl];
-            
-        } else {
-            
-            [self loadH5:default_address];
-        }
-    }
+    [self loadTargetH5];
     
     _btn_reload.layer.cornerRadius = _btn_reload.frame.size.width/2.0;
     _btn_reload.layer.masksToBounds = YES;
     [_btn_reload setBackgroundImage:[Utility imageWithColor:[Utility colorFromHexRGB:@"66cc00"]] forState:UIControlStateNormal];
     [_btn_reload setBackgroundImage:[Utility imageWithColor:[Utility colorFromHexRGB:@"4caf50"]] forState:UIControlStateHighlighted];
+    AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _btn_reload.hidden = !appd.isDebug;
     
     [_lbl_debug.layer addAnimation:[self opacityForever_Animation:1] forKey:nil];
     
@@ -108,6 +88,35 @@
     
     //注册消息回调
     [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
+}
+
+- (void)loadTargetH5
+{
+    AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (!appd.isDebug) {
+        
+        _view_debug.hidden = YES;
+        _lbl_debug.hidden = YES;
+        [self loadH5:default_address];
+        
+    } else {
+        
+        _view_debug.hidden = NO;
+        _lbl_debug.hidden = NO;
+        
+        if (appd.targetUrl && appd.targetUrl.length > 0) {
+            
+            appd.targetUrl = [appd.targetUrl URLDecodedString];
+            
+            [self loadH5:appd.targetUrl];
+            
+        } else {
+            
+            [self loadH5:default_address];
+        }
+    }
+    
+    _btn_reload.hidden = !appd.isDebug;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -159,6 +168,8 @@
     AppDelegate *appd = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     appd.isDebug = NO;
+    
+    _btn_reload.hidden = !appd.isDebug;
     
     EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"退出调试模式"];
     [appd sendMessage:body];

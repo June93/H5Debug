@@ -178,6 +178,8 @@
             ViewController *vc = (ViewController *)[nav.viewControllers objectAtIndex:0];
             vc.lbl_debug.hidden = NO;
             vc.view_debug.hidden = NO;
+            
+            [vc loadTargetH5];
         }
         
     } else {
