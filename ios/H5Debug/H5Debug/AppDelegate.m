@@ -32,23 +32,6 @@
     
     [[EMClient sharedClient] initializeSDKWithOptions:options];
     
-    EMError *error = [[EMClient sharedClient] loginWithUsername:@"iphone" password:@"123456"];
-    if (!error) {
-        
-        NSLog(@"登录成功");
-        
-        PGToast *toast = [PGToast makeToast:@"连接成功"];
-        [toast show];
-        
-        [[EMClient sharedClient].options setIsAutoLogin:YES];
-        
-        [self sendMessage:[self getDeviceInfo]];
-        
-    } else {
-        
-        NSLog(@"%@", error.errorDescription);
-    }
-    
     return YES;
 }
 
@@ -149,7 +132,29 @@
         [vc.webView_h5 reload];
     }
     
+    [self loginEM];
+    
     return YES;
+}
+
+- (void)loginEM
+{
+    EMError *error = [[EMClient sharedClient] loginWithUsername:@"iphone" password:@"123456"];
+    if (!error) {
+        
+        NSLog(@"登录成功");
+        
+        PGToast *toast = [PGToast makeToast:@"连接成功"];
+        [toast show];
+        
+        [[EMClient sharedClient].options setIsAutoLogin:NO];
+        
+        [self sendMessage:[self getDeviceInfo]];
+        
+    } else {
+        
+        NSLog(@"%@", error.errorDescription);
+    }
 }
 
 - (void)sendMessage:(NSString *)content
