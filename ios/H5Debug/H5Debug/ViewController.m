@@ -101,7 +101,11 @@
 
 - (IBAction)btn_reload_click:(id)sender
 {
-    [_webView_h5 reload];
+//    [_webView_h5 reload];
+    
+    NSString *current_address = _webView_h5.request.URL.absoluteString;
+    
+    [self loadH5:current_address];
 }
 
 #pragma mark - Selector
