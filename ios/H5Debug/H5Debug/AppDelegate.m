@@ -128,7 +128,7 @@
         
         targetUrl = [targetUrl URLDecodedString];
         
-        [vc loadH5:[Utility makeUrl:targetUrl] ];
+        [vc loadH5:targetUrl];
         
     } else {
         

@@ -13,6 +13,7 @@
 #import "EMMessageBody.h"
 #import "WebConsole.h"
 #import "PGToast.h"
+#import "Utility.h"
 
 #import "constant.h"
 
@@ -36,6 +37,9 @@
     
     _view_debug.hidden = YES;
     _lbl_debug.hidden = YES;
+    
+    _btn_reload.layer.cornerRadius = _btn_reload.frame.size.width/2.0;
+    _btn_reload.layer.masksToBounds = YES;
     
     [_lbl_debug.layer addAnimation:[self opacityForever_Animation:1] forKey:nil];
     
@@ -66,11 +70,16 @@
     [appd sendMessage:body];
 }
 
+- (IBAction)btn_reload_click:(id)sender
+{
+    [_webView_h5 reload];
+}
+
 #pragma mark - Selector
 //加载指定页面
 - (void)loadH5:(NSString *)address
 {
-    NSURL *url = [[NSURL alloc]initWithString:address];
+    NSURL *url = [[NSURL alloc] initWithString:[Utility makeUrl:address]];
     [_webView_h5 loadRequest:[NSURLRequest requestWithURL:url]];
 }
 

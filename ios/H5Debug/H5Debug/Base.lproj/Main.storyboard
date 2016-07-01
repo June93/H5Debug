@@ -63,10 +63,24 @@
                                     <constraint firstAttribute="height" constant="38" id="fDV-Qd-dfh"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26O-iD-cSy">
+                                <rect key="frame" x="250" y="460" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1Hb-bm-Xr3"/>
+                                    <constraint firstAttribute="width" constant="60" id="4O4-l3-AI7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="刷新"/>
+                                <connections>
+                                    <action selector="btn_reload_click:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Or-xV-j7B"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0Mm-Zb-SCd" firstAttribute="top" secondItem="S3o-3c-ZWu" secondAttribute="bottom" constant="15" id="8qc-V3-P0M"/>
+                            <constraint firstItem="XKj-4Y-J5d" firstAttribute="top" secondItem="26O-iD-cSy" secondAttribute="bottom" constant="10" id="9E3-lg-iAG"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6NE-Yg-dlt" secondAttribute="bottom" id="AkS-Ln-Ela"/>
                             <constraint firstItem="6NE-Yg-dlt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="I9p-Us-5x4"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0Mm-Zb-SCd" secondAttribute="bottom" constant="18" id="aCS-P3-99q"/>
@@ -76,6 +90,7 @@
                             <constraint firstAttribute="trailing" secondItem="FUv-IZ-bTW" secondAttribute="trailing" id="fYL-Ir-kk8"/>
                             <constraint firstItem="XKj-4Y-J5d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="geO-Wa-7Gn"/>
                             <constraint firstAttribute="trailing" secondItem="XKj-4Y-J5d" secondAttribute="trailing" id="h11-fr-9h4"/>
+                            <constraint firstAttribute="trailing" secondItem="26O-iD-cSy" secondAttribute="trailing" constant="10" id="mff-HE-z2N"/>
                             <constraint firstAttribute="trailing" secondItem="S3o-3c-ZWu" secondAttribute="trailing" constant="10" id="pYh-CO-M3M"/>
                             <constraint firstItem="0Mm-Zb-SCd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="q7c-sd-I6k"/>
                             <constraint firstAttribute="trailing" secondItem="6NE-Yg-dlt" secondAttribute="trailing" id="t4b-HI-lQ9"/>
@@ -87,6 +102,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnSend" destination="0Mm-Zb-SCd" id="gvE-2C-01n"/>
+                        <outlet property="btn_reload" destination="26O-iD-cSy" id="VKR-vt-zcQ"/>
                         <outlet property="lblMsg" destination="S3o-3c-ZWu" id="yKr-oy-WEJ"/>
                         <outlet property="lbl_debug" destination="6NE-Yg-dlt" id="3Qp-gW-CaM"/>
                         <outlet property="view_debug" destination="XKj-4Y-J5d" id="5w8-GM-2T2"/>
