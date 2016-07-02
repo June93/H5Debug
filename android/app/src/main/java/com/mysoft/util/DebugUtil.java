@@ -1,5 +1,6 @@
 package com.mysoft.util;
 
+import android.app.Activity;
 import android.webkit.WebView;
 
 import com.hyphenate.EMCallBack;
@@ -35,7 +36,7 @@ public class DebugUtil {
 
     }
 
-    private static void logout(final LoginCallBack callBack) {
+    public static void logout(final LoginCallBack callBack) {
         EMClient.getInstance().logout(true, new EMCallBack() {
 
             @Override
@@ -70,11 +71,36 @@ public class DebugUtil {
         EMClient.getInstance().chatManager().sendMessage(message);
     }
 
-    public static void excuteJs(WebView webView, String jsStr) {
-        try {
-            webView.loadUrl("javascript:" + jsStr);
-        } catch (Exception e) {
+    public static void excuteCommand(final WebView webView, final String command) {
+        Activity topActivity = ActivityUtil.getActivityManager().getTopActivity();
+        if (topActivity == null) {
+            DebugUtil.sendLog("执行命令失败", "web");
+            return;
         }
+        topActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if (StringUtils.getNoneNullString(command).startsWith("control:")) {
+                        //执行自己的命令集
+                        CustomCommandUtil.excuteCommand(command);
+                    } else if (StringUtils.getNoneNullString(command).startsWith("javascript:")) {
+                        webView.loadUrl(command);
+                    } else {
+                        webView.loadUrl("javascript:" + command);
+                    }
+                } catch (Exception e) {
+                    sendLog("执行命令失败", "web");
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public static void sendImage(String imagePath, String toChatUsername) {
+        //imagePath为图片本地路径，false为不发送原图（默认超过100k的图片会压缩后发给对方），需要发送原图传true
+        EMMessage message = EMMessage.createImageSendMessage(imagePath, false, toChatUsername);
+        EMClient.getInstance().chatManager().sendMessage(message);
     }
 
 }
