@@ -14,7 +14,16 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *lblMsg;
 
+@property (nonatomic, weak) IBOutlet UIButton *btnSend;
+
+@property (nonatomic, weak) IBOutlet UIView *view_debug;
+@property (nonatomic, weak) IBOutlet UILabel *lbl_debug;
+
+@property (nonatomic, weak) IBOutlet UIButton *btn_reload;
+
 - (void)loadH5:(NSString *)address;
+
+- (void)loadTargetH5;
 
 @end
 

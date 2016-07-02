@@ -26,9 +26,10 @@
         NSLog(@"%@", webview_log);
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"console_log" object:webview_log];
+
     }
     
-    return FALSE;
+    return false;
 }
 
 @end

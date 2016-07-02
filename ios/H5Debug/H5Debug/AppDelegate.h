@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+#import "EMMessageBody.h"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic) BOOL isDebug;
+
+@property (nonatomic, strong) NSString *targetUrl;
+
+- (void)sendMessage:(EMMessageBody *)body;
+
+- (void)logoutEM;
 
 @end
 

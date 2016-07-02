@@ -1,138 +1,142 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- 隐藏 Sarafi 状态栏  -->
     <meta name="wap-font-scale" content="no">
-    <title>h5-log</title>
+    <title>H5-DEBUG</title>
 
     <style>
-        html, body {
-        background: #dde2e6;
-        height: 100%;
-        width: 100%;
-        position: relative;
-        padding: 0px;
-        margin: 0px;
+        html,
+        body {
+            background: #dde2e6;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            padding: 0px;
+            margin: 0px;
         }
 
         #wx-tip-pannel {
-        display: none;
+            display: none;
         }
 
         .arrow-wrapper {
-        text-align: right;
-        padding-right: 15px;
+            text-align: right;
+            padding-right: 15px;
         }
 
         .arrow {
-        height: 50px;
-        width: 50x;
+            height: 50px;
+            width: 50x;
         }
 
         .logo {
-        height: 18px;
+            height: 18px;
         }
 
         .wx-tip {
-        border: 2px solid #e1e1e1;
-        border-radius: 10px;
-        background-color: white;
-        margin: 4px 16px;
-        padding: 8px;
+            border: 2px solid #e1e1e1;
+            border-radius: 10px;
+            background-color: white;
+            margin: 4px 16px;
+            padding: 8px;
         }
 
         .logo-wrapper {
-        text-align: center;
-        margin: 0px 8px 8px 8px;
+            text-align: center;
+            margin: 0px 8px 8px 8px;
         }
 
         #launch-wrapper {
-
-        margin-top: 50px;
-        margin-left:auto;
-        margin-right:auto;
-        text-align: center;
+            margin-top: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
         }
 
         #launch-btn {
-        display: inline-block;
-        width: 100px;
-        height: 100px;
-        background-color: #22ab9f;
-        border-radius: 50px;
-        text-decoration: none;
-        color: white;
-        line-height: 100px;
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color: #22ab9f;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            line-height: 100px;
         }
 
         .product-name {
-        margin-top: 32px;
+            margin-top: 32px;
         }
 
         .failed-tip {
-        margin-top: 64px;
+            margin-top: 64px;
         }
 
         ul {
-        list-style: none;
-        text-align: left;
-        display: inline-block;
-        padding-left: 0px;
+            list-style: none;
+            text-align: left;
+            display: inline-block;
+            padding-left: 0px;
         }
     </style>
 </head>
+
 <body>
-<div id="wx-tip-pannel">
-    <div class="arrow-wrapper"><img class='arrow' src="./h5debug/ic-point-arrow.png"></div>
-    <div class="wx-tip">
-        请点击右上角选择【在浏览器中打开】，来唤醒你的App进行调试
+    <div id="wx-tip-pannel">
+        <div class="arrow-wrapper"><img class='arrow' src="./h5debug/ic-point-arrow.png"></div>
+        <div class="wx-tip">
+            请点击右上角选择【在浏览器中打开】，来唤醒你的App进行调试
+        </div>
     </div>
-</div>
 
-<div id="launch-wrapper">
-    <p><span id="info">点击按钮即可唤醒APP进行调试</span></p>
-    <!-- <p>欢迎使用GrowingIO！<br/> <span id='info'>点击按钮即可唤醒APP进行圈选</span></p> -->
-    <p id="tip" style="display:none;">退出请直接关闭页面</p>
-    
-    <a id="launch-btn" href="h5debug.69b52e5001736ac7://h5debug/token?circleType=web&amp;source=qrcode&amp;">唤醒APP</a>
+    <div id="launch-wrapper">
+        <p><span id="info">点击按钮即可唤醒APP进行调试</span></p>
+        <!-- <p>欢迎使用GrowingIO！<br/> <span id='info'>点击按钮即可唤醒APP进行圈选</span></p> -->
+        <p id="tip" style="display:none;">退出请直接关闭页面</p>
 
-    <div class="product-name">H5-DEBUG</div>
-    <div class="failed-tip">
-        <div>若您唤醒失败,可能存在以下原因:</div>
-        <ul>
-            <li>1, 您的手机上尚未安装要唤醒的APP</li>
-            <li>2, 您的APP尚未集成我们最新的SDK</li>
-        </ul>
+        <a id="launch-btn" href="h5debug.69b52e5001736ac7://h5debug/token?circleType=web&amp;source=qrcode&amp;">唤醒APP</a>
+
+        <div class="product-name">H5-DEBUG</div>
+        <div class="failed-tip">
+            <div>若您唤醒失败,可能存在以下原因:</div>
+            <ul>
+                <li>1, 您的手机上尚未安装要唤醒的APP</li>
+                <li>2, 您的APP尚未集成我们最新的SDK</li>
+            </ul>
+        </div>
     </div>
-</div>
 
-<script>
-  function checkTargetUrl() {
-  var url = location.search; //获取url中"?"符后的字串
-   var theRequest = new Object();
-   if (url.indexOf("?") != -1) {
-      var str = url.substr(1);
-      strs = str.split("&");
-      for(var i = 0; i < strs.length; i ++) {
-         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
-         console.log('参数：'+strs[i].split("=")[0]+ '值：'+strs[i].split("=")[1]);
-         if(strs[i].split("=")[0]=='targetUrl'){
-            var launchBtn=document.getElementById('launch-btn')
-            var value=launchBtn.getAttribute('href');
-            value = value+'targetUrl='+strs[i].split("=")[1];
-            launchBtn.setAttribute('href',value);
-            console.log(launchBtn.getAttribute('href'));
-         }
-      }
-   }
-   return theRequest;
-}
-</script>
+    <script>
+        function checkTargetUrl() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+                    console.log('参数：' + strs[i].split("=")[0] + '值：' + strs[i].split("=")[1]);
+                    if (strs[i].split("=")[0] == 'targetUrl') {
+                        var launchBtn = document.getElementById('launch-btn')
+                        var value = launchBtn.getAttribute('href');
+                        value = value + 'targetUrl=' + strs[i].split("=")[1];
+                        launchBtn.setAttribute('href', value);
+                        console.log(launchBtn.getAttribute('href'));
+                    }
+                }
+            }
+            return theRequest;
+        }
+    </script>
 
 
-<div id="js-atavi-import-extension-install"></div>
-<script>
-checkTargetUrl();
-</script
-</body></html>
+    <div id="js-atavi-import-extension-install"></div>
+    <script>
+        checkTargetUrl(); <
+        /script <
+        /body></html >

@@ -1,32 +1,46 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0"/>
-<title>H5-DEBUG</title>
-<!--sdk-->
-<script src="static/sdk/strophe.js"></script>
-<script src="static/sdk/easemob.im-1.1.1.js"></script>
-<script src="static/sdk/easemob.im.shim.js"></script><!--兼容老版本(1.0.7含以前版本)sdk需引入此文件-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <link rel="stylesheet" href="css/jquery-labelauty.css">
+    <title>H5-DEBUG</title>
+    <!--sdk-->
 
-<!--config-->
-<script src="static/js/easemob.im.config.js"></script>
+    <script src="static/sdk/strophe.js">
+    </script>
+    <script src="static/sdk/easemob.im-1.1.1.js">
+    </script>
+    <script src="static/sdk/easemob.im.shim.js">
+    </script>
+    <!--兼容老版本(1.0.7含以前版本)sdk需引入此文件-->
+    <!--config-->
 
-<!--demo-->
-<script src="static/js/jquery-1.11.1.js"></script>
-<script src="static/js/bootstrap.js"></script>
-<link rel="stylesheet" href="static/css/bootstrap.css" />
-<link rel="stylesheet" href="static/css/webim.css" />
+    <script src="static/js/easemob.im.config.js">
+    </script>
+    <!--demo-->
 
-<!--[if lte IE 9]>
-<script src="static/js/jplayer/jquery.jplayer.min.js"></script>
-<script src="static/js/swfupload/swfupload.js"></script>
-<![endif]-->
+    <script src="static/js/jquery-1.11.1.js">
+    </script>
+    <script src="static/js/bootstrap.js">
+    </script>
+    <script src="static/js/jquery.qrcode.min.js">
+    </script>
 
+    <script type="text/JavaScript">
+        var genarateQrcode = function(){ var url=$('input[id=getval]').val(); console.log('genarateQrcode.....url='+url+" encodeURIComponent="+encodeURIComponent(url)); var finalUrl="http://10.5.103.69:8081/h5debug/h5debug.html?targetUrl="+encodeURIComponent(url);
+        $('#qrcode').empty(); jQuery('#qrcode').qrcode(finalUrl); }
+    </script>
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" href="static/css/webim.css">
+    <style>
+
+    </style>
 </head>
+
 <body>
-    <div id="loginmodal" class="modal hide in" role="dialog"
-        aria-hidden="true" data-backdrop="static">
+    <div id="loginmodal" class="modal hide in" role="dialog" aria-hidden="true" data-backdrop="static">
         <div class="modal-header">
             <h3>用户登录</h3>
         </div>
@@ -35,9 +49,9 @@
                 <tr>
                     <td width="65%">
                         <label for="username">用户名:</label>
-                        <input type="text" name="username" value="web" id="username" tabindex="1"/>
+                        <input type="text" name="username" value="web" id="username" tabindex="1">
                         <label for="password">密码:</label>
-                        <input type="password" name="password" value="123456" id="password" tabindex="2" />
+                        <input type="password" name="password" value="123456" id="password" tabindex="2">
                     </td>
                 </tr>
             </table>
@@ -46,45 +60,19 @@
             <button class="flatbtn-blu" onclick="login()" tabindex="3">登录</button>
         </div>
     </div>
-
     <div id="waitLoginmodal" class="modal hide" data-backdrop="static">
-        <img src="static/img/waitting.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...</img>
-    </div>
+        <img src="static/img/waitting.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...</div>
     <div class="content" id="content" style="display: none">
         <div class="leftcontact" id="leftcontact">
-            <div id="headerimg" class="leftheader">
-                <span> <img src="static/img/head/header2.jpg" alt="logo"
-                    class="img-circle" width="60px" height="60px"
-                    style="margin-top: -40px; margin-left: 20px" /></span> <span
-                    id="login_user" class="login_user_title"> <a
-                    class="leftheader-font" href="#"></a>
-                </span> <span>
-                    <div class="btn-group" style="margin-left: 5px;">
-                        <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li onclick="logout();">退出</li>
-                        </ul>
-                    </div>
-                </span>
-            </div>
-            <div id="leftmiddle">
-             <ul>
-                <img src="qrcode/1.png" width="250px" height="250px"
-                    style="margin-top: 5px; margin-left: -15px" />
-            </ul>
-            <ul>
-                <img src="qrcode/2.png" width="250px" height="250px"
-                    style="margin-top: 15px; margin-left: -15px" />
-            </ul>
-            </div>
+            <div id="headerimg" class="leftheader"><span><img src=
+"static/img/head/header2.jpg" alt="logo" class="img-circle" width=
+"60px" height="60px" style=
+"margin-top: -40px; margin-left: 20px"></span> <span id="login_user" class="login_user_title"><a class="leftheader-font"
+href="#"></a></span></div>
             <div id="contractlist11">
                 <div class="accordion" id="accordionDiv">
                     <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a id="accordion1" class="accordion-toggle" data-toggle="collapse" data-parent="#accordionDiv" href="#collapseOne">远程设备 </a>
-                        </div>
+                        <div class="accordion-heading"><a id="accordion1" class="accordion-toggle" data-toggle="collapse" data-parent="#accordionDiv" href="#collapseOne">远程设备</a></div>
                         <div id="collapseOne" class="accordion-body collapse in">
                             <div class="accordion-inner" id="contractlist">
                                 <ul id="contactlistUL" class="chat03_content_ul"></ul>
@@ -92,43 +80,52 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        <div id="rightTop" style="height: 78px;"></div>
+        <div id="rightTop" style="height: 50px;"></div>
         <!-- 聊天页面 -->
         <div class="chatRight">
             <div id="chat01">
                 <div class="chat01_title">
                     <ul class="talkTo">
-                        <li id="talkTo"><a href="#"></a></li>
-                        <li id="recycle" style="float: right;"><img
-                            src="static/img/recycle.png" onclick="clearCurrentChat();"
-                            style="margin-right: 15px; cursor: hand; width: 18px;" title="清屏" /></li>
+                        <li id="talkTo">
+                            <a href="#"></a>
+                        </li>
+                        <li id="recycle" style="float: right;"><img src="static/img/recycle.png" onclick="clearCurrentChat();" style="margin-right: 3px; cursor: hand; width: 18px;" title="清屏"></li>
                     </ul>
                 </div>
                 <div id="null-nouser" class="chat01_content"></div>
             </div>
-
             <div class="chat02">
                 <div class="chat02_title">
-                   
-					<label id="chat02_title_t"></label>
-                  
+                    <label id="chat02_title_t"></label>
                 </div>
                 <div id="input_content" class="chat02_content">
                     <textarea id="talkInputId" style="resize: none;"></textarea>
                 </div>
                 <div class="chat02_bar">
-                    <ul>
-                        <li style="right: 5px; top: 5px;"><img src="static/img/send_btn.jpg"
-                            onclick="sendText()" /></li>
-                    </ul>
+                    <label class="radio-inline">
+                        <input type="radio" name="sendType" value="0" checked=""> Javascript
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="sendType" value="1"> Control
+                    </label>
+                    <input type="button" onclick="sendText()" value="发送" class="btn btn-small btn-info">
                 </div>
                 <div style="clear: both;"></div>
             </div>
         </div>
+        <div class="leftQrcode"><img src="qrcode/1.png" width="250px" height="250px" /></div>
+        <div class="rightQrcode" id="qrcode"><img src="qrcode/2.png" width="250px" height="250px" /></div>
+        <div class="qrCodeGenerate1">
+            <input type="text" id="getval" value='http://10.5.103.69:8081/h5debug/phone/dev.html' />
+        </div>
+        <div class="qrCodeGenerate2">
+            <input type="button" onclick="genarateQrcode()" value="生成二维码" class="btn btn-small btn-info">
+        </div>
     </div>
-	<script src="static/js/webim.js"></script>
+    <script src="static/js/webim.js">
+    </script>
 </body>
+
 </html>

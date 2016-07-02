@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -46,14 +46,52 @@
                                     <action selector="btn_sendMsg:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gD1-xz-1L9"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="调试模式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NE-Yg-dlt">
+                                <rect key="frame" x="0.0" y="548" width="320" height="20"/>
+                                <color key="backgroundColor" red="0.0" green="0.5568627451" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Ffs-Gh-rfR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKj-4Y-J5d">
+                                <rect key="frame" x="0.0" y="530" width="320" height="38"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="fDV-Qd-dfh"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="26O-iD-cSy">
+                                <rect key="frame" x="250" y="460" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1Hb-bm-Xr3"/>
+                                    <constraint firstAttribute="width" constant="60" id="4O4-l3-AI7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="刷新"/>
+                                <connections>
+                                    <action selector="btn_reload_click:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2Or-xV-j7B"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0Mm-Zb-SCd" firstAttribute="top" secondItem="S3o-3c-ZWu" secondAttribute="bottom" constant="15" id="8qc-V3-P0M"/>
+                            <constraint firstItem="XKj-4Y-J5d" firstAttribute="top" secondItem="26O-iD-cSy" secondAttribute="bottom" constant="10" id="9E3-lg-iAG"/>
+                            <constraint firstItem="6NE-Yg-dlt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LXH-t9-nOB"/>
+                            <constraint firstAttribute="trailing" secondItem="6NE-Yg-dlt" secondAttribute="trailing" id="Op8-yc-ogR"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6NE-Yg-dlt" secondAttribute="bottom" id="Vaf-HI-tNb"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0Mm-Zb-SCd" secondAttribute="bottom" constant="18" id="aCS-P3-99q"/>
                             <constraint firstAttribute="trailing" secondItem="0Mm-Zb-SCd" secondAttribute="trailing" constant="10" id="bIr-rR-h2u"/>
                             <constraint firstItem="S3o-3c-ZWu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="f4u-vj-rcS"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XKj-4Y-J5d" secondAttribute="bottom" id="fU3-OG-cL6"/>
                             <constraint firstAttribute="trailing" secondItem="FUv-IZ-bTW" secondAttribute="trailing" id="fYL-Ir-kk8"/>
+                            <constraint firstItem="XKj-4Y-J5d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="geO-Wa-7Gn"/>
+                            <constraint firstAttribute="trailing" secondItem="XKj-4Y-J5d" secondAttribute="trailing" id="h11-fr-9h4"/>
+                            <constraint firstAttribute="trailing" secondItem="26O-iD-cSy" secondAttribute="trailing" constant="10" id="mff-HE-z2N"/>
                             <constraint firstAttribute="trailing" secondItem="S3o-3c-ZWu" secondAttribute="trailing" constant="10" id="pYh-CO-M3M"/>
                             <constraint firstItem="0Mm-Zb-SCd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="q7c-sd-I6k"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FUv-IZ-bTW" secondAttribute="bottom" id="tFi-lx-Lpn"/>
@@ -61,9 +99,14 @@
                             <constraint firstItem="FUv-IZ-bTW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="yTi-Bw-mrK"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="TWe-lF-zEx"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="btnSend" destination="0Mm-Zb-SCd" id="gvE-2C-01n"/>
+                        <outlet property="btn_reload" destination="26O-iD-cSy" id="VKR-vt-zcQ"/>
                         <outlet property="lblMsg" destination="S3o-3c-ZWu" id="yKr-oy-WEJ"/>
+                        <outlet property="lbl_debug" destination="6NE-Yg-dlt" id="3Qp-gW-CaM"/>
+                        <outlet property="view_debug" destination="XKj-4Y-J5d" id="5w8-GM-2T2"/>
                         <outlet property="webView_h5" destination="FUv-IZ-bTW" id="Na1-mK-KaM"/>
                     </connections>
                 </viewController>

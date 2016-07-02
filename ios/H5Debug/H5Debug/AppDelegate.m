@@ -8,13 +8,19 @@
 
 #import "AppDelegate.h"
 
+#import "ViewController.h"
 #import "EMSDK.h"
 
+#import "EMTextMessageBody.h"
+#import "EMConversation.h"
 #import "ViewController.h"
-
 #import "PGToast.h"
-
 #import "NSString+URLEncoding.h"
+#import "GBDeviceInfo.h"
+#import "OpenUDID.h"
+#import "Utility.h"
+
+#import "constant.h"
 
 @interface AppDelegate ()
 
@@ -26,26 +32,37 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window makeKeyAndVisible];
+    
+    ViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    self.window.rootViewController = nav;
+    
     EMOptions *options = [EMOptions optionsWithAppkey:@"acetrump#h5-debug"];
     
     [[EMClient sharedClient] initializeSDKWithOptions:options];
     
-    EMError *error = [[EMClient sharedClient] loginWithUsername:@"iphone" password:@"123456"];
-    if (!error) {
-        
-        NSLog(@"登录成功");
-        
-        PGToast *toast = [PGToast makeToast:@"连接成功"];
-        [toast show];
-        
-        [[EMClient sharedClient].options setIsAutoLogin:YES];
-        
-    } else {
-        
-        NSLog(@"%@", error.errorDescription);
-    }
-    
     return YES;
+}
+
+- (NSString *)getDeviceInfo
+{
+    NSString *device_modal = [GBDeviceInfo deviceInfo].modelString;
+    
+    NSString *device_version = [[UIDevice currentDevice] systemVersion];
+    
+    // app版本
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *app_version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    
+    NSString *device_id = [OpenUDID value];
+    
+    NSString *result = [NSString stringWithFormat:@"设备名称：%@，系统版本：%@，APP版本：%@，设备ID：%@", device_modal, device_version, app_version, device_id];
+    
+    return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -73,11 +90,11 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
--(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    BOOL isExistTargetUrl = NO;
+    self.isDebug = YES;
     
-    NSString *targetUrl = @"";
+    BOOL isExistTargetUrl = NO;
     
     NSString *str_url = [url absoluteString];
     
@@ -106,7 +123,7 @@
                     
                     isExistTargetUrl = YES;
                     
-                    targetUrl = value;
+                    self.targetUrl = value;
                     
                     break;
                 }
@@ -114,21 +131,105 @@
         }
     }
     
-    //刷新 
-    ViewController *vc = (ViewController *)self.window.rootViewController;
+    //刷新
+//    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+//    
+//    if (nav.viewControllers == 0) {
+//        
+//        return YES;
+//    }
+//    
+//    ViewController *vc = (ViewController *)[nav.viewControllers objectAtIndex:0];
+//    
+//    if (isExistTargetUrl) {
+//        
+//        targetUrl = [targetUrl URLDecodedString];
+//        
+//        [vc loadH5:targetUrl];
+//        
+//    } else {
+//        
+//        [vc loadH5:default_address];
+//    }
     
-    if (isExistTargetUrl) {
+    [self loginEM];
+    
+    return YES;
+}
+
+- (void)loginEM
+{
+    EMError *error = [[EMClient sharedClient] loginWithUsername:@"iphone" password:@"123456"];
+    if (!error) {
         
-        targetUrl = [targetUrl URLDecodedString];
+        NSLog(@"登录成功");
         
-        [vc loadH5:targetUrl];
+        PGToast *toast = [PGToast makeToast:@"连接成功"];
+        [toast show];
+        
+        [[EMClient sharedClient].options setIsAutoLogin:NO];
+        
+        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:[self getDeviceInfo]];
+        [self sendMessage:body];
+        
+        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+        if (nav.viewControllers) {
+            
+            ViewController *vc = (ViewController *)[nav.viewControllers objectAtIndex:0];
+            vc.lbl_debug.hidden = NO;
+            vc.view_debug.hidden = NO;
+            
+            [vc loadTargetH5];
+        }
         
     } else {
         
-        [vc.webView_h5 reload];
+        NSLog(@"%@", error.errorDescription);
+    }
+}
+
+- (void)logoutEM
+{
+    EMError *error = [[EMClient sharedClient] logout:YES];
+    if (!error) {
+        
+        PGToast *toast = [PGToast makeToast:@"断开调试模式"];
+        [toast show];
+        
+        NSLog(@"退出成功");
+    }
+}
+
+- (void)sendMessage:(EMMessageBody *)body
+{
+    EMError *error = nil;
+    NSArray *userlist = [[EMClient sharedClient].contactManager getContactsFromServerWithError:&error];
+    if (!error) {
+        NSLog(@"获取成功 -- %@",userlist);
     }
     
-    return YES;
+    EMConversation *ems = [[EMClient sharedClient].chatManager getConversation:@"web" type:EMConversationTypeChat createIfNotExist:YES];
+    
+    NSString *from = [[EMClient sharedClient] currentUsername];
+    
+    EMMessage *message = [[EMMessage alloc] initWithConversationID:ems.conversationId from:from to:ems.conversationId body:body ext:nil];
+    message.chatType = EMChatTypeChat; // 设置为单聊消息
+    
+    [[[EMClient sharedClient] chatManager] asyncSendMessage:message progress:^(int progress) {
+        
+        //
+        
+    } completion:^(EMMessage *message, EMError *error) {
+        
+        if (!error) {
+            
+            NSLog(@"消息发送成功");
+            
+            PGToast *toast = [PGToast makeToast:@"消息发送成功"];
+            [toast show];
+        }
+        
+    }];
 }
 
 @end
